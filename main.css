@@ -16,3 +16,50 @@ html {
      background-color: rgba(91, 48, 247, 0.87);
      z-index: 1;
  }
+
+
+/* ------------   Landing Page ------------*/
+
+ .hero{
+    position: relative; 
+    min-height: 600px; 
+    background-image: url(https://unsplash.com/photos/uLitVttkC7o);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.hero .hero-title{
+    position: absolute;             
+    top: 40%;                       
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50);
+    width: 100%;                    
+    text-align: center;
+    font-size: 4rem;             
+    font-weight: 300;               
+    text-transform: uppercase;      
+    letter-spacing: 0.5rem;         
+    text-shadow: 1px 1px 0px rgb(58,23,63);  
+}
+
+
+/*-----------   Library ------  */
+
+.library-container{
+     display: grid;
+     grid-template-columns: 300px 300px 300px;
+     grid-gap: 10px;
+     background-color: #fff;
+     color: #444;
+}
+
+.album-container-collection{
+     background-color: #444;
+     color: #fff;
+     border-radius: 5px;
+     padding: 20px;
+     font-size: 150%;
+}
