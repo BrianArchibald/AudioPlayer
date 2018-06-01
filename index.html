@@ -7,7 +7,7 @@
 <body class="player">
 	<nav class="navbar">
 		<a href="index.html" class="logo">
-			<img src="headphones.png" alt="logo">
+			<img src="headphones.png" alt="logo" id="logo">
 		</a>
 		<ul class="nav-library">
 			<li>
@@ -24,7 +24,9 @@
 
 			<div class="album-details">
 				<h2 class="album-title">Title</h2>
+				
 				<h3 class="album-artist">Artist</h3>
+				
 				<h5 class="album-year">1987</h5>
 			</div>
 
@@ -64,35 +66,35 @@
 		<div class="control-container">
 			<div class="controls main-playback">
 				<a class="previous">
-					<span class="#">
-					</span>
+					<ion-icon name="rewind"></ion-icon>
 				</a>
 				<a class="play">
-					<span class="#">
-					</span>
+					<ion-icon name="play"></ion-icon>
+					<ion-icon name="pause"></ion-icon>
 				</a>
 				<a class="next">
-					<span class="#">
-					</span>
+					<ion-icon name="fastforward"></ion-icon>
 				</a>
 			</div>
 
-			<div class="controls progess-bar">
-				<h2 class="song-name">Song Name</h2>
-			</div>
+			
 			
 			<div class="seek-control">
-				<div class="seek-bar">
+				<div class="seek-title">Title</div>
+
+				<div class="seek-bar-length">
 					<div class="fill"></div>
 					<div class="thumb"></div>
 				</div>
 				<div class="current-time">2:00</div>
 				<div class="total-time">5:00</div>
+				<div class="seek-artist">Artist</div>
 			</div>
 
 			<div class="controls volume">
-				<span class="#">
-				<div class="seek-bar">
+				<ion-icon name="volume-high"></ion-icon>
+				<ion-icon name="volume-off"></ion-icon>
+				<div class="seek-bar-volume">
 					<div class="fill"></div>
 					<div class="thumb"></div>
 				</div>
@@ -101,5 +103,6 @@
 	</section>  <!-- End of playbar sections -->
 
 	<script type="text/javascript" src="mainplayer.js"></script>
+	<script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
 </body>
 </html>

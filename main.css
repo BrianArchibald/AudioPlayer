@@ -13,13 +13,18 @@ html {
  .navbar {
      display: grid;
      grid-template-columns: 1fr 1fr;
-     padding: 0.5rem;
-     background-color: rgba(91, 48, 247, 0.87);
+     padding: 1rem;
+     background-color: rgb(122, 110, 110, 0.87);
      z-index: 1;
  }
 
- a.logo {
+ .logo {
      display: grid;
+     height: 65%;
+ }
+
+ nav img {
+    color: #4C7A61;
  }
 
 .nav-library{
@@ -76,7 +81,7 @@ html {
      align-items: center;
 }
 
-/* Main Page   */
+/* ---------- Main Page -----------  */
 
 .player{
     background-image: url("blur.jpg");
@@ -93,6 +98,19 @@ html {
    grid-template-columns: 1fr 1fr;
 }
 
+.album-art{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4rem;
+}
+
+.album-details{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .main-top img{
     height: 210px;
     width: auto;
@@ -104,9 +122,36 @@ html {
     grid-template-rows: 1fr;
     justify-content: center;
     align-items: center;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
 }
 
 .each-song{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+}
+
+
+/* ----------Playback section------------  */
+
+.control-container {
+    display: grid;
+    grid-gap: 10rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+.seek-bar-length .fill {
+    background-color: white;
+    width: 100%;
+    height: .25rem;
+    border-radius: 2px;
+} 
+
+.seek-bar-volume .fill {
+    background-color: white;
+    width: 30%;
+    height: .25rem;
+    border-radius: 2px;
 }
