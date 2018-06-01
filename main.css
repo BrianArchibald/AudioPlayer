@@ -30,8 +30,8 @@ html {
 
  .hero{
     position: relative; 
-    min-height: 600px; 
-    background-image: url(https://unsplash.com/photos/uLitVttkC7o);
+    min-height: 600px;
+    background-image: url('guitar.jpg');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -39,7 +39,7 @@ html {
 
 .hero .hero-title{
     position: absolute;             
-    top: 40%;                       
+    top: 20%;                       
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
     -ms-transform: translateY(-50%);
@@ -49,7 +49,7 @@ html {
     font-size: 4rem;             
     font-weight: 300;               
     text-transform: uppercase;      
-    letter-spacing: 0.5rem;         
+    letter-spacing: 0.4rem;         
     text-shadow: 1px 1px 0px rgb(58,23,63);  
 }
 
@@ -74,4 +74,29 @@ html {
      font-size: 150%;
      justify-content: center;
      align-items: center;
+}
+
+/* Main Page   */
+
+.player{
+    background-image: url("blur.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.main-top{
+   display: grid;
+   grid-gap: 20px;
+   align-items: center;
+   grid-template-columns: 1fr 1fr;
+}
+
+.main-top img{
+    height: 210px;
+    width: auto;
+}
+
+.album-list{
+
 }
