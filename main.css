@@ -81,6 +81,11 @@ html {
      align-items: center;
 }
 
+.album-collection-container img{
+    height: 210px;
+    width: auto;
+}
+
 /* ---------- Main Page -----------  */
 
 .player{
@@ -128,7 +133,7 @@ html {
 
 .each-song{
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
 }
 
 
