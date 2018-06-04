@@ -18,6 +18,9 @@ var songTitle = document.getElementById('songTitle');
 var fillTime = document.getElementById('fillTime');
 var currentTime = document.getElementById('currentTime');
 var seekArtist = document.getElementById('seekArtist');
+var albumTitle = document.getElementById('album-title');
+var albumArtist = document.getElementById('album-artist');
+var albumYear = document.getElementById('album-year');
 
 let songsList = '';
 jazzSampler.songs.forEach((song, index) => {
@@ -33,6 +36,12 @@ jazzSampler.songs.forEach((song, index) => {
 
 document.getElementsByClassName('album-list')[0].innerHTML = songsList;
 
+
+// document.getElementByClassName('album-title').innerHTML = "jazzSampler.title";
+// document.getElementByClassName('album-artist').innerHTML = "jazzSampler.artist";
+// document.getElementByClassName('album-year').innerHTML = "jazzSampler.year";
+
+
 var song = new Audio();
 var currentSong = 0;
 
@@ -40,6 +49,9 @@ function playSong() {
 	song.src = jazzSampler.songs[currentSong].audioUrl; 
 	songTitle.textContent = jazzSampler.songs[currentSong].title;
 	seekArtist.textContent = jazzSampler.artist;
+	albumTitle.textContent = jazzSampler.title;
+	albumArtist.textContent = jazzSampler.artist;
+	albumYear.textContent = jazzSampler.year;
 	song.play(); 
 }
 
@@ -110,9 +122,6 @@ function pre() {
 	playSong();
 
 	getElementById('pauseIcon').style.display = "none";
-
-// 	$('#play img').attr('src',"Pause.png");
-
 }
 
 function decreaseVolume() {
