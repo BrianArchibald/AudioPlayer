@@ -160,3 +160,33 @@ html {
     height: .25rem;
     border-radius: 2px;
 }
+
+#pauseIcon {
+    display: none;
+}
+
+.seek-bar-length {
+    height: 0.25rem;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    position: relative;
+    cursor: pointer;
+}
+
+.seek-bar-length:hover .thumb {
+    height: 1.1rem;
+    width: 1.1rem;
+    margin-top: -0.5rem;
+    margin-left: -0.5rem;  
+}
+
+.seek-bar-length .thumb {
+    position: absolute;
+    height: 0.5rem;
+    width: 0.5rem;
+    background-color: white;
+    margin-top: .25rem;
+    margin-left: .25rem; 
+    border-radius: 50%;
+    cursor: pointer;
+}

@@ -21,63 +21,20 @@
 			<div class="album-art">
 				<img src="jazzband.jpg">
 			</div>
-
 			<div class="album-details">
 				<h2 class="album-title">Title</h2>
-				
 				<h3 class="album-artist">Artist</h3>
-				
 				<h5 class="album-year">1987</h5>
 			</div>
 
 		</div>
 	<div class="album-list">
-		<div class="each-song">
-			<div class="song-number">1</div>
-			<ion-icon name="play-circle"></ion-icon>
-			<div class="song-title">Title</div>
-			<div class="song-length">4:20</div>
-		</div>
-		<div class="each-song">
-			<div class="song-number">2</div>
-			<ion-icon name="play-circle"></ion-icon>
-			<div class="song-title">Title</div>
-			<div class="song-length">4:20</div>
-		</div>
-		<div class="each-song">
-			<div class="song-number">3</div>
-			<ion-icon name="play-circle"></ion-icon>
-			<div class="song-title">Title</div>
-			<div class="song-length">4:20</div>
-		</div>
-		<div class="each-song">
-			<div class="song-number">4</div>
-			<ion-icon name="play-circle"></ion-icon>
-			<div class="song-title">Title</div>
-			<div class="song-length">4:20</div>
-		</div>
-		<div class="each-song">
-			<div class="song-number">5</div>
-			<ion-icon name="play-circle"></ion-icon>
-			<div class="song-title">Title</div>
-			<div class="song-length">4:20</div>
-		</div>
-		<div class="each-song">
-			<div class="song-number">6</div>
-			<ion-icon name="play-circle"></ion-icon>
-			<div class="song-title">Title</div>
-			<div class="song-length">4:20</div>
-		</div>
-		<div class="each-song">
-			<div class="song-number">7</div>
-			<ion-icon name="play-circle"></ion-icon>
-			<div class="song-title">Title</div>
-			<div class="song-length">4:20</div>
-		</div>
-	</div> <!-- End of Album List -->
+
+	</div> 
+
+	<!-- End of Album List -->
 
 	</main> <!-- End of Main Section -->
-
 
 	<section class="player-control">
 		<div class="control-container">
@@ -86,16 +43,14 @@
 					<ion-icon name="rewind"></ion-icon>
 				</a>
 				<a class="play-pause">
-					<ion-icon name="play" id="playIcon"></ion-icon>
-					<ion-icon name="pause" id-"pauseIcon"></ion-icon>
+					<ion-icon name="play" id="playIcon" onclick="playOrPauseSong()"></ion-icon>
+					<ion-icon name="pause" id="pauseIcon" onclick="playOrPauseSong()"></ion-icon>
 				</a>
 				<a class="next">
 					<ion-icon name="fastforward"></ion-icon>
 				</a>
 			</div>
 
-			
-			
 			<div class="seek-control">
 				<div class="seek-title" id="songTitle">Title</div>
 
@@ -105,7 +60,7 @@
 				</div>
 				<div class="current-time" id="currentTime">2:00</div>
 				<div class="total-time">5:00</div>
-				<div class="seek-artist">Artist</div>
+				<div class="seek-artist" id="seekArtist">Artist</div>
 			</div>
 
 			<div class="controls volume">

@@ -1,5 +1,5 @@
 const jazzSampler = {
-   title: 'jazzSampler',
+   title: 'Jazz Sampler',
    artist: 'Kevin MacLeod',
    year: '2011',
    albumArtUrl: 'jazzband.jpg',
@@ -8,7 +8,7 @@ const jazzSampler = {
      { title: 'Dances and Dames', duration: "2:26", audioUrl: 'Music/Kevin_MacLeod_-_Dances_and_Dames.mp3' },
      { title: 'Faster Does It', duration: "3:01", audioUrl: 'Music/Kevin_MacLeod_-_Faster_Does_It.mp3' },
      { title: 'I Knew A Guy', duration: "2:46", audioUrl: 'Music/Kevin_MacLeod_-_I_Knew_a_Guy.mp3' },
-     { title: 'Night on the Docks - Sax', duration: "2:54", audioUrl: 'Music/NightKevin_MacLeod_-_Night_on_the_Docks_-_Sax.mp3' },
+     { title: 'Night on the Docks - Sax', duration: "2:54", audioUrl: 'Music/Kevin_MacLeod_-_Night_on_the_Docks_-_Sax.mp3' },
      { title: 'Off to Osaka', duration: "1:49", audioUrl: 'Music/Kevin_MacLeod_-_Off_to_Osaka.mp3' },
      { title: 'Vibe Ace', duration: "1:01", audioUrl: 'Music/Kevin_MacLeod_-_Vibe_Ace.mp3' }
    ]
@@ -17,12 +17,13 @@ const jazzSampler = {
 var songTitle = document.getElementById('songTitle');
 var fillTime = document.getElementById('fillTime');
 var currentTime = document.getElementById('currentTime');
+var seekArtist = document.getElementById('seekArtist');
 
 let songsList = '';
 jazzSampler.songs.forEach((song, index) => {
 	songsList += `
 		<div class="each-song">
-			<div class="song-number">${index + 1}</div>
+			<div class="song-number">${index + 1}</div> 
 			<ion-icon name="play-circle"></ion-icon>
 			<div class="song-title">${song.title}</div>
 			<div class="song-length">${song.duration}</div>
@@ -38,28 +39,26 @@ var currentSong = 0;
 function playSong() {
 	song.src = jazzSampler.songs[currentSong].audioUrl; 
 	songTitle.textContent = jazzSampler.songs[currentSong].title;
-	console.log(song.src)
+	seekArtist.textContent = jazzSampler.artist;
 	song.play(); 
 }
 
 function playOrPauseSong() {
 	if(!song || song.paused) {
 		playSong();
-	document.getElementById("playIcon").style.display = "none";
-	document.getElementById("pauseIcon").style.display = "inline-block";
-	} else {
+		document.getElementById("playIcon").style.display = "none";
+		document.getElementById("pauseIcon").style.display = "inline-block";
+		} else {
 		song.pause();
-	document.getElementById("pauseIcon").style.display = "none";
-	document.getElementById("playIcon").style.display = "inline-block";
+		document.getElementById("pauseIcon").style.display = "none";
+		document.getElementById("playIcon").style.display = "inline-block";
 	}
 }
 
 song.addEventListener('timeupdate', function() {
 	var position = song.currentTime / song.duration;
 	fillTime.style.width = `${position * 100}%`;
-
 	convertTime(Math.round(song.currentTime));
-
 	if(song.ended) {
 		next();
 	}
@@ -99,12 +98,8 @@ function next() {
 	if(currentSong > jazzSampler.songs.length) {   
 		currentSong = 0;   
 	}
-// 	playSong();
-
-	getElementById.playIcon.style.display = "none";
-
-// 	$('#play img').attr('src',"Pause.png");
-// 	
+	playSong();
+	document.getElementById('playIcon').style.display = "none"; 	
 }
 
 function pre() {
@@ -114,7 +109,7 @@ function pre() {
 	}
 	playSong();
 
-	getElementById.pauseIcon.style.display = "none";
+	getElementById('pauseIcon').style.display = "none";
 
 // 	$('#play img').attr('src',"Pause.png");
 
