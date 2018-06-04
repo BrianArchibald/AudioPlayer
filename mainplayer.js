@@ -4,53 +4,55 @@ const jazzSampler = {
    year: '2011',
    albumArtUrl: 'jazzband.jpg',
    songs: [
-     { title: 'As I Figure', duration: "3:36", audioUrl: 'Music/Kevin_MacLeod_-_As_I_Figure' },
-     { title: 'Dances and Dames', duration: "2:26", audioUrl: 'Music/Kevin_MacLeod_-_Dances_and_Dames' },
-     { title: 'Faster Does It', duration: "3:01", audioUrl: 'Music/Kevin_MacLeod_-_Faster_Does_It' },
-     { title: 'I Knew A Guy', duration: "2:46", audioUrl: 'Music/Kevin_MacLeod_-_I_Knew_a_Guy' },
-     { title: 'Night on the Docks - Sax', duration: "2:54", audioUrl: 'Music/NightKevin_MacLeod_-_Night_on_the_Docks_-_Sax' },
-     { title: 'Off to Osaka', duration: "1:49", audioUrl: 'Music/Kevin_MacLeod_-_Off_to_Osaka' },
-     { title: 'Vibe Ace', duration: "1:01", audioUrl: 'Music/Kevin_MacLeod_-_Vibe_Ace' }
+     { title: 'As I Figure', duration: "3:36", audioUrl: 'Music/Kevin_MacLeod_-_As_I_Figure.mp3' },
+     { title: 'Dances and Dames', duration: "2:26", audioUrl: 'Music/Kevin_MacLeod_-_Dances_and_Dames.mp3' },
+     { title: 'Faster Does It', duration: "3:01", audioUrl: 'Music/Kevin_MacLeod_-_Faster_Does_It.mp3' },
+     { title: 'I Knew A Guy', duration: "2:46", audioUrl: 'Music/Kevin_MacLeod_-_I_Knew_a_Guy.mp3' },
+     { title: 'Night on the Docks - Sax', duration: "2:54", audioUrl: 'Music/NightKevin_MacLeod_-_Night_on_the_Docks_-_Sax.mp3' },
+     { title: 'Off to Osaka', duration: "1:49", audioUrl: 'Music/Kevin_MacLeod_-_Off_to_Osaka.mp3' },
+     { title: 'Vibe Ace', duration: "1:01", audioUrl: 'Music/Kevin_MacLeod_-_Vibe_Ace.mp3' }
    ]
 };
-
-
-// const songs = ["As I Figure.mps", "Dances and Dames.mp3", "Faster Does It.mp3",
-// 	"I Knew A Guy.mps", "Night on the Docks - Sax.mp3", "Off to Osaka.mp3", "Vibe Ace.mp3"];
 
 var songTitle = document.getElementById('songTitle');
 var fillTime = document.getElementById('fillTime');
 var currentTime = document.getElementById('currentTime');
 
+let songsList = '';
+jazzSampler.songs.forEach((song, index) => {
+	songsList += `
+		<div class="each-song">
+			<div class="song-number">${index + 1}</div>
+			<ion-icon name="play-circle"></ion-icon>
+			<div class="song-title">${song.title}</div>
+			<div class="song-length">${song.duration}</div>
+		</div>
+	`;
+});
+
+document.getElementsByClassName('album-list')[0].innerHTML = songsList;
+
 var song = new Audio();
 var currentSong = 0;
 
 function playSong() {
-	song.src = songs[currentSong]; 
-	songTitle.textContent = songs[currentSong];
+	song.src = jazzSampler.songs[currentSong].audioUrl; 
+	songTitle.textContent = jazzSampler.songs[currentSong].title;
+	console.log(song.src)
 	song.play(); 
 }
 
 function playOrPauseSong() {
-	if(song.paused) {
-		song.play();
-
-//		set ion icons on title sections and player section to pause // use display hidden
-		
-	getElementById.playIcon.style.display = "none";
-
-// 		$('#play img').attr('src','Pause.png');
+	if(!song || song.paused) {
+		playSong();
+	document.getElementById("playIcon").style.display = "none";
+	document.getElementById("pauseIcon").style.display = "inline-block";
 	} else {
-// 		song.pause();
-
-	getElementById.pauseIcon.style.display = "none";
-
-//		set ion icons on title sections and player section to play
-// 		$('#play img').attr('src','Play.png');
+		song.pause();
+	document.getElementById("pauseIcon").style.display = "none";
+	document.getElementById("playIcon").style.display = "inline-block";
 	}
 }
-
-
 
 song.addEventListener('timeupdate', function() {
 	var position = song.currentTime / song.duration;
@@ -94,7 +96,7 @@ function totalTime(seconds) {
 
 function next() {
 	currentSong++;
-	if(currentSong > 6) {   // last element in array instead???????
+	if(currentSong > jazzSampler.songs.length) {   
 		currentSong = 0;   
 	}
 // 	playSong();
@@ -108,7 +110,7 @@ function next() {
 function pre() {
 	currentSong--;
 	if(currentSong < 0) {
-		currentSong = 6;   /// last element in array instead???
+		currentSong = jazzSampler.songs.length;  
 	}
 	playSong();
 
