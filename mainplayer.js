@@ -27,7 +27,8 @@ jazzSampler.songs.forEach((song, index) => {
 	songsList += `
 		<div class="each-song">
 			<div class="song-number">${index + 1}</div> 
-			<ion-icon name="play-circle"></ion-icon>
+			<ion-icon name="play" id="playIcon" onclick="playOrPauseSong()"></ion-icon>
+			<ion-icon name="pause" id="pauseIcon" onclick="playOrPauseSong()"></ion-icon>
 			<div class="song-title">${song.title}</div>
 			<div class="song-length">${song.duration}</div>
 		</div>
