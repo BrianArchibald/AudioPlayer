@@ -40,14 +40,14 @@
 		<div class="control-container">
 			<div class="controls main-playback">
 				<a class="previous">
-					<ion-icon name="rewind"></ion-icon>
+					<ion-icon name="rewind" id="rewind" onclick="pre()"></ion-icon>
 				</a>
 				<a class="play-pause">
 					<ion-icon name="play" id="playIcon" onclick="playOrPauseSong()"></ion-icon>
 					<ion-icon name="pause" id="pauseIcon" onclick="playOrPauseSong()"></ion-icon>
 				</a>
 				<a class="next">
-					<ion-icon name="fastforward"></ion-icon>
+					<ion-icon name="fastforward" id="fastforward" onclick="next()"></ion-icon>
 				</a>
 			</div>
 
@@ -64,8 +64,8 @@
 			</div>
 
 			<div class="controls volume">
-				<ion-icon name="volume-high"></ion-icon>
-				<ion-icon name="volume-off"></ion-icon>
+				<ion-icon name="volume-high" id="volume-high"></ion-icon>
+				<ion-icon name="volume-off" id="volume-off"></ion-icon>
 				<div class="seek-bar-volume">
 					<div class="fill"></div>
 					<div class="thumb"></div>
