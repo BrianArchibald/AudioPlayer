@@ -53,6 +53,9 @@ function playSong() {
 	albumTitle.textContent = jazzSampler.title;
 	albumArtist.textContent = jazzSampler.artist;
 	albumYear.textContent = jazzSampler.year;
+
+	// set song number playing to play icon   
+
 	song.play(); 
 }
 
@@ -76,6 +79,8 @@ song.addEventListener('timeupdate', function() {
 		next();
 	}
 });
+
+
 
 fillTime.addEventListener('click', seekTime);
 
@@ -125,28 +130,28 @@ function pre() {
 	getElementById('pauseIcon').style.display = "none";
 }
 
-function decreaseVolume() {
-	song.volume > 0 && (song.volume = parseFloat(song.volume.toFixed(2)) - .2);
-}
+// function decreaseVolume() {
+// 	song.volume > 0 && (song.volume = parseFloat(song.volume.toFixed(2)) - .2);
+// }
 
-function increaseVolume() {
-	song.volume !== 1 && (song.volume += 0.20);
-}
+// function increaseVolume() {
+// 	song.volume !== 1 && (song.volume += 0.20);
+// }
 
 
 
 /// volume section 
 
-// var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
-//   var offsetXPercent = seekBarFillRatio * 100;
-//   offsetXPercent = Math.max(0, offsetXPercent);
-//   offsetXPercent = Math.min(100, offsetXPercent);
+var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
+  var offsetXPercent = seekBarFillRatio * 100;
+  offsetXPercent = Math.max(0, offsetXPercent);
+  offsetXPercent = Math.min(100, offsetXPercent);
   
-//   var percentageString = offsetXPercent + '%';
-//   $seekBar.find('.fill').width(percentageString);
-//   $seekBar.find('.thumb').css({left: percentageString});
-//   return offsetXPercent;
-// };
+  var percentageString = offsetXPercent + '%';
+  $seekBar.find('.fill').width(percentageString);
+  $seekBar.find('.thumb').css({left: percentageString});
+  return offsetXPercent;
+};
 
 // var setupSeekBars = function() {
 //   updateSeekPercentage($('.player-bar .volume .seek-bar'), currentVolume/100);
