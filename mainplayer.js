@@ -21,6 +21,7 @@ var seekArtist = document.getElementById('seekArtist');
 var albumTitle = document.getElementById('album-title');
 var albumArtist = document.getElementById('album-artist');
 var albumYear = document.getElementById('album-year');
+var seekThumb = document.getElementById('seekThumb');
 
 let songsList = '';
 jazzSampler.songs.forEach((song, index) => {
@@ -87,24 +88,18 @@ function playOrPauseSong(index) {
  }
 }
 
-// song.addEventListener('timeupdate', function() {
-// 	var position = song.currentTime / song.duration;
-// 	fillTime.style.width = `${position * 100}%`;
-// 	convertTime(Math.round(song.currentTime));
-// 	if(song.ended) {
-// 		next();
-// 	}
-// });
 
+// seek bar and thumb moving while song plays
 song.addEventListener('timeupdate', function() {
  if(song && song.src){
-  if(song.duration){
-            var position = song.currentTime / song.duration;
-            fillTime.style.width = `${position * 100}%`;
-            convertTime(Math.round(song.currentTime));
-            if(song.ended) {
-                next();
-            }
+  if(song.duration){ // make sure there is number for duration to prevent NaN
+        var position = song.currentTime / song.duration;
+        fillTime.style.width = `${position * 100}%`;
+        seekThumb.style.css = `${position * 100}%`;
+        convertTime(Math.round(song.currentTime));
+        if(song.ended) {
+            next();
+        }
   }
  }
 });
@@ -113,14 +108,23 @@ song.addEventListener('timeupdate', function() {
 fillTime.addEventListener('click', seekTime);
 
 
-// seekbar incrementing while song plays
+// song responding to seek click
 function seekTime() {
 	document.getElementById('fillTime').innerHTML = song.currentTime;
-	document.getElementById('seekTh').innerHTML = song.currentTime;
 	var percent = e.offsetX / this.offsetWidth;
     song.currentTime = percent * song.duration;
     fillTime.value = percent * 100;
 }
+
+
+// song thumb moving while song plays
+// function seekThumb() {
+// 	document.getElementById('seekThumb').innerHTML = song.currentTime;
+// 	var percent = e.offsetX / this.offsetWidth;
+//     song.currentTime = percent * song.duration;
+//     seekThumb.value = percent * 100;
+// }
+
 
 function convertTime(seconds) {
 	var min = Math.floor(seconds / 60);
