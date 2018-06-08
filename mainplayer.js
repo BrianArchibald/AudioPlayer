@@ -25,13 +25,13 @@ var albumYear = document.getElementById('album-year');
 let songsList = '';
 jazzSampler.songs.forEach((song, index) => {
 	songsList += `
-		<div class="each-song">
-			<div class="song-number">${index + 1}</div> 
-			<ion-icon name="play" id="playIcon" onclick="playOrPauseSong()"></ion-icon>
-			<ion-icon name="pause" id="pauseIcon" onclick="playOrPauseSong()"></ion-icon>
-			<div class="song-title">${song.title}</div>
-			<div class="song-length">${song.duration}</div>
-		</div>
+		 <div class="each-song">
+		  <div class="song-number">${index + 1}</div> 
+		  <ion-icon name="play" class="playIcon" onclick="playOrPauseSong(${index})"></ion-icon>
+		  <ion-icon name="pause" class="pauseIcon" onclick="playOrPauseSong(${index})"></ion-icon>
+		  <div class="song-title">${song.title}</div>
+		  <div class="song-length">${song.duration}</div>
+		  </div>
 	`;
 });
 
@@ -59,33 +59,64 @@ function playSong() {
 	song.play(); 
 }
 
-function playOrPauseSong() {
-	if(!song || song.paused) {
-		playSong();
-		document.getElementById("playIcon").style.display = "none";
-		document.getElementById("pauseIcon").style.display = "inline-block";
-		} else {
-		song.pause();
-		document.getElementById("pauseIcon").style.display = "none";
-		document.getElementById("playIcon").style.display = "inline-block";
-	}
+// function playOrPauseSong() {
+// 	if(!song || song.paused) {
+// 		playSong();
+// 		document.getElementById("playIcon").style.display = "none";
+// 		document.getElementById("pauseIcon").style.display = "inline-block";
+// 		} else {
+// 		song.pause();
+// 		document.getElementById("pauseIcon").style.display = "none";
+// 		document.getElementById("playIcon").style.display = "inline-block";
+// 	}
+// }
+
+function playOrPauseSong(index) {
+ if(song){
+  if(song.src && song.src.includes(jazzSampler.songs[index].audioUrl) && (song.currentTime > 0)){
+   if(song.paused) song.play();
+   else song.pause(); {
+   		document.getElementsByClassName("playIcon")[0].style.display = "inline-block";
+        document.getElementsByClassName("pauseIcon")[0].style.display = "none";
+   }
+  }else {
+   playSong();
+            document.getElementsByClassName("playIcon")[0].style.display = "none";
+            document.getElementsByClassName("pauseIcon")[0].style.display = "inline-block";
+  }
+ }
 }
 
-song.addEventListener('timeupdate', function() {
-	var position = song.currentTime / song.duration;
-	fillTime.style.width = `${position * 100}%`;
-	convertTime(Math.round(song.currentTime));
-	if(song.ended) {
-		next();
-	}
-});
+// song.addEventListener('timeupdate', function() {
+// 	var position = song.currentTime / song.duration;
+// 	fillTime.style.width = `${position * 100}%`;
+// 	convertTime(Math.round(song.currentTime));
+// 	if(song.ended) {
+// 		next();
+// 	}
+// });
 
+song.addEventListener('timeupdate', function() {
+ if(song && song.src){
+  if(song.duration){
+            var position = song.currentTime / song.duration;
+            fillTime.style.width = `${position * 100}%`;
+            convertTime(Math.round(song.currentTime));
+            if(song.ended) {
+                next();
+            }
+  }
+ }
+});
 
 
 fillTime.addEventListener('click', seekTime);
 
+
+// seekbar incrementing while song plays
 function seekTime() {
 	document.getElementById('fillTime').innerHTML = song.currentTime;
+	document.getElementById('seekTh').innerHTML = song.currentTime;
 	var percent = e.offsetX / this.offsetWidth;
     song.currentTime = percent * song.duration;
     fillTime.value = percent * 100;
@@ -117,7 +148,8 @@ function next() {
 		currentSong = 0;   
 	}
 	playSong();
-	document.getElementById('playIcon').style.display = "none"; 	
+	document.getElementsByClassName('playIcon').style.display = "none"; 
+	document.getElementsByClassName("pauseIcon").style.display = "inline-block";	
 }
 
 function pre() {
@@ -126,8 +158,8 @@ function pre() {
 		currentSong = jazzSampler.songs.length;  
 	}
 	playSong();
-
-	getElementById('pauseIcon').style.display = "none";
+	document.getElementByClassName('pauseIcon').style.display = "none";
+	document.getElementsByClassName("pauseIcon").style.display = "inline-block";
 }
 
 // function decreaseVolume() {

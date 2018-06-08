@@ -10,7 +10,7 @@
 			<ion-icon name="headset" id="headphones"></ion-icon>
 		</a>
 		<ul class="nav-library">
-			<li>
+			<li id="library-link">
 				<a href="library.html">Music Library</a>
 			</li>
 		</ul>
@@ -43,8 +43,8 @@
 					<ion-icon name="rewind" id="rewind" onclick="pre()"></ion-icon>
 				</a>
 				<a class="play-pause">
-					<ion-icon name="play" id="playIcon" onclick="playOrPauseSong()"></ion-icon>
-					<ion-icon name="pause" id="pauseIcon" onclick="playOrPauseSong()"></ion-icon>
+					<ion-icon name="play" class="playIcon" onclick="playOrPauseSong()"></ion-icon>
+					<ion-icon name="pause" class="pauseIcon" onclick="playOrPauseSong()"></ion-icon>
 				</a>
 				<a class="next">
 					<ion-icon name="fastforward" id="fastforward" onclick="next()"></ion-icon>
@@ -56,7 +56,7 @@
 
 				<div class="seek-bar-length">
 					<div class="fill" id="fillTime"></div>
-					<div class="thumb"></div>
+					<div class="thumb" id="seekThumb"></div>
 				</div>
 				<div class="current-time" id="currentTime">2:00</div>
 				<div class="total-time">5:00</div>
@@ -77,4 +77,4 @@
 	<script type="text/javascript" src="mainplayer.js"></script>
 	<script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
 </body>
-</html
+</html>
