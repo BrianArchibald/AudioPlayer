@@ -8,6 +8,11 @@ html {
      color: grey;             
      min-height: 100%; 
      margin: 0;
+
+    background-image: url("blur.jpg");
+     background-repeat: repeat;
+     background-position: center center;
+     background-size: cover;
      
  }
 
@@ -17,14 +22,16 @@ html {
      padding: 1rem;
      background-color: rgb(122, 110, 110, 0.87);
      z-index: 1;
+     padding: 30px 60px 30px 60px;
  }
 
  .logo {
      font-size: 2rem;
  }
 
- #headphone {
-    font-size: 20px;
+ #headphones {
+    font-size: 30px;
+    color: #e8b500; 
  }
 
 .nav-library{
@@ -34,6 +41,14 @@ html {
 #library-link {
     text-align: right;
 }
+
+#library-link a {
+    text-decoration: none;
+    color: #e8b500;
+    font-size: 20px;
+    font-weight: bold;
+}
+
 
 /* ------------   Landing Page ------------*/
 
@@ -70,14 +85,9 @@ html {
      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
      grid-gap: 30px;
      margin: 20px;
-     background-color: #fff;
+     background-color: none;
      color: #444;
      justify-content: center;
-     
-
-
-  
-
 }
 
 .album-collection-container{
@@ -89,6 +99,12 @@ html {
      font-size: 1.5rem;
      justify-content: center;
      align-items: center;
+    
+}
+
+.album-collection-container a{
+    text-decoration: none;
+    color: #e8b500;
 }
 
 .album-collection-container img{
@@ -96,18 +112,19 @@ html {
     width: auto;
 }
 
-@media screen and (max-width: 800px) {
+/* @media screen and (max-width: 800px) {
   .album-collection-container {
     grid-template-columns: 40% 40%;
   }
 }
 
-/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+Responsive layout - makes the two columns stack on top of each other instead of next to each other 
 @media screen and (max-width: 600px) {
   .album-collection-container {
     grid-template-columns: 80%;
   }
 }
+*/
 
 /* ---------- Main Page -----------  */
 
