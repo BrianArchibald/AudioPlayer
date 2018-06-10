@@ -95,7 +95,7 @@ song.addEventListener('timeupdate', function() {
   if(song.duration){ // make sure there is number for duration to prevent NaN
         var position = song.currentTime / song.duration;
         fillTime.style.width = `${position * 100}%`;
-        seekThumb.style.css = ({left: currentTime + '%'});
+        seekThumb.style.left = `${currentTime + '%'}`;
         convertTime(Math.round(song.currentTime));
         if(song.ended) {
             next();

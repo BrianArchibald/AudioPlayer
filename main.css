@@ -4,6 +4,7 @@ html {
  }
  
  body {
+
      font-family: 'Open Sans'; 
      color: grey;             
      min-height: 100%; 
@@ -55,11 +56,16 @@ html {
 
  .hero{
     position: relative; 
-    min-height: 600px;
+    min-height: 1200px;
     background-image: url('guitar.jpg');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
+    
+}
+
+.hero img{
+    opacity: 0.6;
 }
 
 .hero .hero-title{
@@ -72,7 +78,8 @@ html {
     width: 100%;                    
     text-align: center;
     font-size: 4rem;             
-    font-weight: 300;               
+    font-weight: 300; 
+    color: #ffffff;              
     text-transform: uppercase;      
     letter-spacing: 0.4rem;         
     text-shadow: 1px 1px 0px rgb(58,23,63);  
@@ -231,6 +238,10 @@ Responsive layout - makes the two columns stack on top of each other instead of 
     width: 30%;
     height: .25rem;
     border-radius: 2px;
+}
+
+#songTitle {
+    justify-self: center;
 }
 
 #volume-high, #volume-off{
