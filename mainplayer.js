@@ -55,9 +55,9 @@ function playSong() {
 	albumArtist.textContent = jazzSampler.artist;
 	albumYear.textContent = jazzSampler.year;
 
-	// set song number playing to play icon   
-
 	song.play(); 
+	document.getElementsByClassName("playIcon")[0].style.display = "none";
+    document.getElementsByClassName("pauseIcon")[0].style.display = "inline-block";
 }
 
 // function playOrPauseSong() {
@@ -75,12 +75,14 @@ function playSong() {
 function playOrPauseSong(index) {
  if(song){
   if(song.src && song.src.includes(jazzSampler.songs[index].audioUrl) && (song.currentTime > 0)){
-   if(song.paused) song.play();
+   if(song.paused) { 
+   	song.play();
+   }
    else song.pause(); {
    		document.getElementsByClassName("playIcon")[0].style.display = "inline-block";
         document.getElementsByClassName("pauseIcon")[0].style.display = "none";
    }
-  }else {
+  } else {
    playSong();
             document.getElementsByClassName("playIcon")[0].style.display = "none";
             document.getElementsByClassName("pauseIcon")[0].style.display = "inline-block";
@@ -95,7 +97,7 @@ song.addEventListener('timeupdate', function() {
   if(song.duration){ // make sure there is number for duration to prevent NaN
         var position = song.currentTime / song.duration;
         fillTime.style.width = `${position * 100}%`;
-        seekThumb.style.left = `${currentTime + '%'}`;
+        seekThumb.style.left = `${position * 100}%`;
         convertTime(Math.round(song.currentTime));
         if(song.ended) {
             next();

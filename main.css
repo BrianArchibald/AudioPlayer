@@ -286,9 +286,12 @@ Responsive layout - makes the two columns stack on top of each other instead of 
     grid-template-columns: 1fr 5fr;
 }
 
-.controls-volume .icon{
+#volume-off, #volume-high {
+    padding-right: 20px;
+}
 
-    align-content: right;
+.seek-bar-volume {
+    align-self: center;
 }
 
 .seek-control .seek-title{
