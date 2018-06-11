@@ -231,3 +231,25 @@ var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
 //   });  
    
 // };
+
+
+
+// clicking on seek bar changes position of the song
+
+progressBar.addEventListener("click", seek);
+
+function seek(e) {
+	var percent = e.offsetX / this.offsetWidth;
+	song.currentTime = percent * song.duration;
+	document.getElementById("fill").style.width = percent / 100;
+}
+
+function decreaseVolume() {
+	song.volume > 0 && (song.volume = parseFloat(song.volume.toFixed(2)) - .2);
+	console.log(song.volume)
+}
+
+function increaseVolume() {
+	song.volume !== 1 && (song.volume += 0.20);
+	console.log(song.volume);
+}
