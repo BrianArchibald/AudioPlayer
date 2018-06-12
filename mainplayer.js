@@ -22,6 +22,8 @@ var albumTitle = document.getElementById('album-title');
 var albumArtist = document.getElementById('album-artist');
 var albumYear = document.getElementById('album-year');
 var seekThumb = document.getElementById('seekThumb');
+var volumeOn = document.getElementById('volume-high');
+var volumeOff = document.getElementById('volume-off');
 
 let songsList = '';
 jazzSampler.songs.forEach((song, index) => {
@@ -38,12 +40,6 @@ jazzSampler.songs.forEach((song, index) => {
 
 document.getElementsByClassName('album-list')[0].innerHTML = songsList;
 
-
-// document.getElementByClassName('album-title').innerHTML = "jazzSampler.title";
-// document.getElementByClassName('album-artist').innerHTML = "jazzSampler.artist";
-// document.getElementByClassName('album-year').innerHTML = "jazzSampler.year";
-
-
 var song = new Audio();
 var currentSong = 0;
 
@@ -58,6 +54,8 @@ function playSong() {
 	song.play(); 
 	document.getElementsByClassName("playIcon")[0].style.display = "none";
     document.getElementsByClassName("pauseIcon")[0].style.display = "inline-block";
+    // document.getElementsByClassName("playIcon").style.display = "none";
+    // document.getElementsByClassName("pauseIcon").style.display = "inline-block";
 }
 
 // function playOrPauseSong() {
@@ -90,11 +88,10 @@ function playOrPauseSong(index) {
  }
 }
 
-
 // seek bar and thumb moving while song plays
 song.addEventListener('timeupdate', function() {
  if(song && song.src){
-  if(song.duration){ // make sure there is number for duration to prevent NaN
+  if(song.duration){          // make sure there is number for duration to prevent NaN
         var position = song.currentTime / song.duration;
         fillTime.style.width = `${position * 100}%`;
         seekThumb.style.left = `${position * 100}%`;
@@ -102,47 +99,31 @@ song.addEventListener('timeupdate', function() {
         if(song.ended) {
             next();
         }
-  }
+    }
  }
 });
 
-
-fillTime.addEventListener('click', seekTime);
-
-
 // song responding to seek click
-function seekTime() {
-	document.getElementById('fillTime').innerHTML = song.currentTime;
+seekBarLength.addEventListener('click', seekTime);
+
+function seekTime(e) {
 	var percent = e.offsetX / this.offsetWidth;
     song.currentTime = percent * song.duration;
-    fillTime.value = percent * 100;
+    document.getElementById('fillTime').style.width = percent / 100;
 }
-
-
-// song thumb moving while song plays
-// function seekThumb() {
-// 	document.getElementById('seekThumb').innerHTML = song.currentTime;
-// 	var percent = e.offsetX / this.offsetWidth;
-//     song.currentTime = percent * song.duration;
-//     seekThumb.value = percent * 100;
-// }
-
 
 function convertTime(seconds) {
 	var min = Math.floor(seconds / 60);
 	var sec = seconds % 60;
-
 	min = (min < 10) ? '0' + min : min;
 	sec = (sec < 10) ? '0' + sec : sec;
 	currentTime.textContent = min + ':' + sec;
-
 	totalTime(Math.round(song.duration));
 }
 
 function totalTime(seconds) {
 	var min = Math.floor(seconds / 60);
 	var sec = seconds % 60;
-
 	min = (min < 10) ? '0' + min : min;
 	sec = (sec < 10) ? '0' + sec : sec;
 	currentTime.textContent += '/' + min + ':' + sec;
@@ -180,6 +161,33 @@ function pre() {
 
 /// volume section 
 
+function enableMute() {
+	song.muted = true;
+	document.getElementById('volume-high').style.display = "none";
+	document.getElementById('volume-off').style.display = "inline-block";
+}
+
+function disableMute() {
+	song.muted = false;
+	document.getElementById('volume-high').style.display = "inline-block";
+	document.getElementById('volume-off').style.display = "none";
+}
+
+
+
+
+// volume responding to seek click
+seekBarVolume.addEventListener('click', seekVolume);
+
+function seekVolume(e) {
+	var percent = e.offsetX / this.offsetWidth;
+    song.volume = percent;
+    document.getElementById('fillVolume').style.width = percent;
+    console.log(this);
+    console.log(song.volume);
+}
+
+///jquery seek bars
 var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
   var offsetXPercent = seekBarFillRatio * 100;
   offsetXPercent = Math.max(0, offsetXPercent);
@@ -236,13 +244,7 @@ var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
 
 // clicking on seek bar changes position of the song
 
-progressBar.addEventListener("click", seek);
 
-function seek(e) {
-	var percent = e.offsetX / this.offsetWidth;
-	song.currentTime = percent * song.duration;
-	document.getElementById("fill").style.width = percent / 100;
-}
 
 function decreaseVolume() {
 	song.volume > 0 && (song.volume = parseFloat(song.volume.toFixed(2)) - .2);

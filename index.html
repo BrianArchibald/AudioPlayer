@@ -43,7 +43,7 @@
 					<ion-icon name="rewind" id="rewind" onclick="pre()"></ion-icon>
 				</a>
 				<a class="play-pause">
-					<ion-icon name="play" class="playIcon" onclick="playSong()"></ion-icon>
+					<ion-icon name="play" class="playIcon" onclick="playOrPauseSong()"></ion-icon>
 					<ion-icon name="pause" class="pauseIcon" onclick="playOrPauseSong()"></ion-icon>
 				</a>
 				<a class="next">
@@ -54,7 +54,7 @@
 			<div class="seek-control">
 				<div class="seek-title" id="songTitle"></div>
 
-				<div class="seek-bar-length">
+				<div class="seek-bar-length" id="seekBarLength">
 					<div class="fill" id="fillTime"></div>
 					<div class="thumb" id="seekThumb"></div>
 				</div>
@@ -64,11 +64,11 @@
 			</div>
 
 			<div class="controls-volume">
-				<ion-icon name="volume-high" id="volume-high"></ion-icon>
-				<ion-icon name="volume-off" id="volume-off"></ion-icon>
-				<div class="seek-bar-volume">
-					<div class="fill"></div>
-					<div class="thumb"></div>
+				<ion-icon name="volume-high" id="volume-high" onclick="enableMute()"></ion-icon>
+				<ion-icon name="volume-off" id="volume-off" onclick="disableMute()"></ion-icon>
+				<div class="seek-bar-volume" id="seekBarVolume">
+					<div class="fill" id="fillVolume"></div>
+					<div class="thumb" id="thumbVolume"></div>
 				</div>
 			</div>
 		</div>
