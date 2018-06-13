@@ -57,9 +57,6 @@ document.getElementsByClassName('album-list')[0].innerHTML = songsList;
 // 		}
 // }
 
-
-
-
 var song = new Audio();
 var currentSong = 0;
 
@@ -125,12 +122,13 @@ song.addEventListener('timeupdate', function() {
 
 // song responding to seek click
 
-
 function seekTime(e) {
 	var percent = e.offsetX / this.offsetWidth;;
     song.currentTime = percent * song.duration;
-    console.log(currentTime);
+    console.log(song.duration);
     console.log(percent);
+    console.log(song.currentTime);
+    
 
     document.getElementById('fillTime').style.width = percent / 100;
 }
@@ -140,8 +138,6 @@ seekBarLength.addEventListener('click', seekTime);
 seekBarLength.addEventListener('mousemove', (e) => mousedown && seekTime(e)); // if mousedown is false - wont run
 seekBarLength.addEventListener('mousedown', () => mousedown = true);
 seekBarLength.addEventListener('mouseup', () => mousedown = false);
-
-
 
 
 
@@ -182,16 +178,6 @@ function pre() {
 	document.getElementsByClassName("pauseIcon").style.display = "inline-block";
 }
 
-// function decreaseVolume() {
-// 	song.volume > 0 && (song.volume = parseFloat(song.volume.toFixed(2)) - .2);
-// }
-
-// function increaseVolume() {
-// 	song.volume !== 1 && (song.volume += 0.20);
-// }
-
-
-
 /// volume section 
 
 function enableMute() {
@@ -207,30 +193,29 @@ function disableMute() {
 }
 
 
-
-
 // volume responding to seek click
 seekBarVolume.addEventListener('click', seekVolume);
 
 function seekVolume(e) {
 	var percent = e.offsetX / this.offsetWidth;
     song.volume = percent;
-    document.getElementById('fillVolume').style.width = percent;
+    document.getElementById('fillVolume').style.width = `${percent * 100}%`;
+   // document.getElementById('fillThumb').style.left = `${percent * 100}%`;
     console.log(this);
     console.log(song.volume);
 }
 
 ///jquery seek bars
-var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
-  var offsetXPercent = seekBarFillRatio * 100;
-  offsetXPercent = Math.max(0, offsetXPercent);
-  offsetXPercent = Math.min(100, offsetXPercent);
+// var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
+//   var offsetXPercent = seekBarFillRatio * 100;
+//   offsetXPercent = Math.max(0, offsetXPercent);
+//   offsetXPercent = Math.min(100, offsetXPercent);
   
-  var percentageString = offsetXPercent + '%';
-  $seekBar.find('.fill').width(percentageString);
-  $seekBar.find('.thumb').css({left: percentageString});
-  return offsetXPercent;
-};
+//   var percentageString = offsetXPercent + '%';
+//   $seekBar.find('.fill').width(percentageString);
+//   $seekBar.find('.thumb').css({left: percentageString});
+//   return offsetXPercent;
+// };
 
 // var setupSeekBars = function() {
 //   updateSeekPercentage($('.player-bar .volume .seek-bar'), currentVolume/100);
@@ -274,17 +259,12 @@ var updateSeekPercentage = function($seekBar, seekBarFillRatio) {
 // };
 
 
+// function decreaseVolume() {
+// 	song.volume > 0 && (song.volume = parseFloat(song.volume.toFixed(2)) - .2);
+// 	console.log(song.volume)
+// }
 
-// clicking on seek bar changes position of the song
-
-
-
-function decreaseVolume() {
-	song.volume > 0 && (song.volume = parseFloat(song.volume.toFixed(2)) - .2);
-	console.log(song.volume)
-}
-
-function increaseVolume() {
-	song.volume !== 1 && (song.volume += 0.20);
-	console.log(song.volume);
-}
+// function increaseVolume() {
+// 	song.volume !== 1 && (song.volume += 0.20);
+// 	console.log(song.volume);
+// }
