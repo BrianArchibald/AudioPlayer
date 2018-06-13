@@ -54,9 +54,8 @@ html {
 
 /* ------------   Landing Page ------------*/
 
- .hero{
+ .landing{
     position: relative; 
-    min-height: 1200px;
     background-image: url('guitar.jpg');
     background-repeat: no-repeat;
     background-position: center center;
@@ -198,6 +197,8 @@ Responsive layout - makes the two columns stack on top of each other instead of 
     border-bottom: 1px solid black;
     margin-bottom: 1rem;
 }
+
+
 
 
 /* ----------Playback section------------  */

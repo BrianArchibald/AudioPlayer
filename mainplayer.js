@@ -38,7 +38,27 @@ jazzSampler.songs.forEach((song, index) => {
 	`;
 });
 
+
 document.getElementsByClassName('album-list')[0].innerHTML = songsList;
+
+
+// add play/pause on hover of each song
+
+// var eachSong = document.getElementsByClassName('each-song');
+// eachSong.addEventListener('hover', showIcon);
+
+// function showIcon() {
+// 	if (song.pause) {
+//    		document.getElementsByClassName("playIcon")[0].style.display = "inline-block";
+//         document.getElementsByClassName("pauseIcon")[0].style.display = "none";
+//    } else {
+//          document.getElementsByClassName("playIcon")[0].style.display = "none";
+//          document.getElementsByClassName("pauseIcon")[0].style.display = "inline-block";
+// 		}
+// }
+
+
+
 
 var song = new Audio();
 var currentSong = 0;
@@ -104,13 +124,26 @@ song.addEventListener('timeupdate', function() {
 });
 
 // song responding to seek click
-seekBarLength.addEventListener('click', seekTime);
+
 
 function seekTime(e) {
-	var percent = e.offsetX / this.offsetWidth;
+	var percent = e.offsetX / this.offsetWidth;;
     song.currentTime = percent * song.duration;
+    console.log(currentTime);
+    console.log(percent);
+
     document.getElementById('fillTime').style.width = percent / 100;
 }
+
+let mousedown = false;
+seekBarLength.addEventListener('click', seekTime);
+seekBarLength.addEventListener('mousemove', (e) => mousedown && seekTime(e)); // if mousedown is false - wont run
+seekBarLength.addEventListener('mousedown', () => mousedown = true);
+seekBarLength.addEventListener('mouseup', () => mousedown = false);
+
+
+
+
 
 function convertTime(seconds) {
 	var min = Math.floor(seconds / 60);
