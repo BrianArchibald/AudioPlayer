@@ -24,6 +24,7 @@ var albumYear = document.getElementById('album-year');
 var seekThumb = document.getElementById('seekThumb');
 var volumeOn = document.getElementById('volume-high');
 var volumeOff = document.getElementById('volume-off');
+var thumbVolume = document.getElementById('thumbVolume');
 
 let songsList = '';
 jazzSampler.songs.forEach((song, index) => {
@@ -99,6 +100,7 @@ function playOrPauseSong(index) {
    }
   } else {
    playSong();
+
             document.getElementsByClassName("playIcon")[0].style.display = "none";
             document.getElementsByClassName("pauseIcon")[0].style.display = "inline-block";
   }
@@ -192,7 +194,6 @@ function disableMute() {
 	document.getElementById('volume-off').style.display = "none";
 }
 
-
 // volume responding to seek click
 seekBarVolume.addEventListener('click', seekVolume);
 
@@ -200,9 +201,7 @@ function seekVolume(e) {
 	var percent = e.offsetX / this.offsetWidth;
     song.volume = percent;
     document.getElementById('fillVolume').style.width = `${percent * 100}%`;
-   // document.getElementById('fillThumb').style.left = `${percent * 100}%`;
-    console.log(this);
-    console.log(song.volume);
+    thumbVolume.style.left = `${percent * 100}%`;
 }
 
 ///jquery seek bars
