@@ -185,21 +185,23 @@ song.addEventListener('timeupdate', function() {
  }
 });
 
-// song responding to seek click
+// song responding to drag and drop on seek bar
 
 function seekTime(e) {
-	var percent = e.offsetX / seekBarLength.offsetWidth;;
-    song.currentTime = percent * song.duration;
+	var seekTimePercent = (e.offsetX / seekBarLength.offsetWidth) * song.duration;
+    song.currentTime = seekTimePercent;
+
+    console.log(e);
     console.log(song.duration);
-    console.log(percent);
+    console.log(seekTimePercent);
     console.log(song.currentTime);
     
-    document.getElementById('fillTime').style.width = percent / 100;
+    document.getElementById('fillTime').style.width = seekTimePercent / 100;
 }
 
 let mousedown = false;
 seekBarLength.addEventListener('click', seekTime);
-seekBarLength.addEventListener('mousemove', (e) => mousedown && seekTime(e)); // if mousedown is false - wont run
+seekBarLength.addEventListener('mousemove', (e) => mousedown && seekTime(e)); 
 seekBarLength.addEventListener('mousedown', () => mousedown = true);
 seekBarLength.addEventListener('mouseup', () => mousedown = false);
 
@@ -208,7 +210,7 @@ seekBarLength.addEventListener('mouseup', () => mousedown = false);
 function convertTime(seconds) {
 	var min = Math.floor(seconds / 60);
 	var sec = seconds % 60;
-	min = (min < 10) ? '0' + min : min;
+	min = (min < 10) ? + min : min;
 	sec = (sec < 10) ? '0' + sec : sec;
 	currentTime.textContent = min + ':' + sec;
 	totalTime(Math.round(song.duration));
@@ -216,8 +218,8 @@ function convertTime(seconds) {
 
 function totalTime(seconds) {
 	var min = Math.floor(seconds / 60);
-	var sec = seconds % 60;
-	min = (min < 10) ? '0' + min : min;
+	var sec = seconds % 60;	
+    min = (min < 10) ? '0' + min : min;
 	sec = (sec < 10) ? '0' + sec : sec;
 	currentTime.textContent += '/' + min + ':' + sec;
 }

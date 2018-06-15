@@ -236,6 +236,10 @@ Responsive layout - makes the two columns stack on top of each other instead of 
     justify-self: end;
 }
 
+.seek-control {
+    display: grid;
+}
+
 .seek-bar-length .fill {
     background-color: white;
     width: 100%;
@@ -251,6 +255,10 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 }
 
 #songTitle {
+    justify-self: center;
+}
+
+.seek-artist {
     justify-self: center;
 }
 
@@ -272,6 +280,16 @@ Responsive layout - makes the two columns stack on top of each other instead of 
     border-radius: 2px;
     position: relative;
     cursor: pointer;
+}
+
+.current-time {
+    margin: 10px 0 10px 0;
+    justify-self: center;
+}
+
+.seek-title {
+    margin-bottom: 10px;
+    justify-self: center;
 }
 
 #seekBarVolume:hover .thumb {
@@ -301,6 +319,7 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 .controls-volume {
     display: grid;
     grid-template-columns: 1fr 5fr;
+    margin-top: -10px;
 }
 
 #volume-off, #volume-high {
