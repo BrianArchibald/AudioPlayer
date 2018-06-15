@@ -42,70 +42,133 @@ jazzSampler.songs.forEach((song, index) => {
 
 document.getElementsByClassName('album-list')[0].innerHTML = songsList;
 
-
 // add play/pause on hover of each song
 
-// var eachSong = document.getElementsByClassName('each-song');
-// eachSong.addEventListener('hover', showIcon);
 
-// function showIcon() {
+// individualSongs[0].addEventListener('hover', showIcon);
+
+
+// function showIcon(songId) {
 // 	if (song.pause) {
-//    		document.getElementsByClassName("playIcon")[0].style.display = "inline-block";
-//         document.getElementsByClassName("pauseIcon")[0].style.display = "none";
+//    		document.getElementsByClassName("playIcon")[songId].style.display = "inline-block";
+//         document.getElementsByClassName("pauseIcon")[songId].style.display = "none";
+//         document.getElementsByClassName("song-number")[songId].style.display = "none";
 //    } else {
-//          document.getElementsByClassName("playIcon")[0].style.display = "none";
-//          document.getElementsByClassName("pauseIcon")[0].style.display = "inline-block";
+//          document.getElementsByClassName("playIcon")[songId].style.display = "none";
+//          document.getElementsByClassName("pauseIcon")[songId].style.display = "inline-block";
+//          document.getElementsByClassName("song-number")[songId].style.display = "none";
 // 		}
 // }
+// var individualSongs = document.getElementsByClassName('each-song');
+
+
+
+// show icon on songs when hover over song names
+document.getElementById('album-list').addEventListener('hover', function(event) {
+  showIcon(event.target);
+  console.log(event.target);
+});
+
+function showIcon(songId) {
+  if (song.pause) {
+    console.log(paused);
+        document.getElementsByClassName("playIcon")[songId].style.display = "inline-block";
+        document.getElementsByClassName("pauseIcon")[songId].style.display = "none";
+        document.getElementsByClassName("song-number")[songId].style.display = "none";
+   } else {
+    console.log(play);
+         document.getElementsByClassName("playIcon")[songId].style.display = "none";
+         document.getElementsByClassName("pauseIcon")[songId].style.display = "inline-block";
+         document.getElementsByClassName("song-number")[songId].style.display = "none";
+        }
+   }
+
+
+
+window.onload = function () {
+	song.volume = 0.5;
+}
 
 var song = new Audio();
 var currentSong = 0;
 
-function playSong() {
-	song.src = jazzSampler.songs[currentSong].audioUrl; 
-	songTitle.textContent = jazzSampler.songs[currentSong].title;
+function playSong(index) {
+	let songId = index === undefined ? currentSong : index;
+	song.src = jazzSampler.songs[songId].audioUrl; 
+	songTitle.textContent = jazzSampler.songs[songId].title;
 	seekArtist.textContent = jazzSampler.artist;
 	albumTitle.textContent = jazzSampler.title;
 	albumArtist.textContent = jazzSampler.artist;
 	albumYear.textContent = jazzSampler.year;
 
 	song.play(); 
-	document.getElementsByClassName("playIcon")[0].style.display = "none";
-    document.getElementsByClassName("pauseIcon")[0].style.display = "inline-block";
-    // document.getElementsByClassName("playIcon").style.display = "none";
-    // document.getElementsByClassName("pauseIcon").style.display = "inline-block";
+    //Song list icons
+	document.getElementsByClassName("playIcon")[songId].style.display = "none";
+    document.getElementsByClassName("pauseIcon")[songId].style.display = "inline-block";
+    document.getElementsByClassName("song-number")[songId].style.display = "none";
+    // PlayBar Icon
+    document.getElementById("playBarPlayIcon").style.display = "none";
+    document.getElementById("playBarPauseIcon").style.display = "inline-block";
+
+    
 }
 
-// function playOrPauseSong() {
-// 	if(!song || song.paused) {
-// 		playSong();
-// 		document.getElementById("playIcon").style.display = "none";
-// 		document.getElementById("pauseIcon").style.display = "inline-block";
-// 		} else {
-// 		song.pause();
-// 		document.getElementById("pauseIcon").style.display = "none";
-// 		document.getElementById("playIcon").style.display = "inline-block";
-// 	}
-// }
 
 function playOrPauseSong(index) {
- if(song){
-  if(song.src && song.src.includes(jazzSampler.songs[index].audioUrl) && (song.currentTime > 0)){
-   if(song.paused) { 
-   	song.play();
-   }
-   else song.pause(); {
-   		document.getElementsByClassName("playIcon")[0].style.display = "inline-block";
-        document.getElementsByClassName("pauseIcon")[0].style.display = "none";
-   }
-  } else {
-   playSong();
 
-            document.getElementsByClassName("playIcon")[0].style.display = "none";
-            document.getElementsByClassName("pauseIcon")[0].style.display = "inline-block";
-  }
- }
+    // song will have src only if a song has been played
+    if (song.src) {
+        
+        // check if last song played is the one we are trying to play
+        if (song.src.indexOf(jazzSampler.songs[index].audioUrl) !== -1) {
+
+            if (song.paused) {
+                document.getElementsByClassName("playIcon")[index].style.display = "none";
+                document.getElementsByClassName("pauseIcon")[index].style.display = "inline-block";
+                song.play();
+            }
+            else {
+
+                document.getElementsByClassName("playIcon")[index].style.display = "inline-block";
+                document.getElementsByClassName("pauseIcon")[index].style.display = "none";
+                song.pause();
+            }
+        }
+
+        // different song we are trying to play
+        else {
+            document.getElementsByClassName("playIcon")[index].style.display = "none";
+            document.getElementsByClassName("pauseIcon")[index].style.display = "inline-block";
+            playSong(index);
+        }
+    }
+    // first time playing a song
+    else {
+        document.getElementsByClassName("playIcon")[index].style.display = "none";
+        document.getElementsByClassName("pauseIcon")[index].style.display = "inline-block";
+        playSong(index);
+    }
 }
+
+// function playOrPauseSong(index) {
+//  if(song){
+//   if(song.src && song.src.includes(jazzSampler.songs[index].audioUrl) && (song.currentTime > 0)){
+//    if(song.paused) { 
+//    	song.play();
+//    }
+//    else song.pause(); {
+//    		document.getElementsByClassName("playIcon")[0].style.display = "inline-block";
+//         document.getElementsByClassName("pauseIcon")[0].style.display = "none";
+//    }
+//   } else {
+//    playSong();
+
+//             document.getElementsByClassName("playIcon")[0].style.display = "none";
+//             document.getElementsByClassName("pauseIcon")[0].style.display = "inline-block";
+//   }
+//  }
+// }
+
 
 // seek bar and thumb moving while song plays
 song.addEventListener('timeupdate', function() {
@@ -125,13 +188,12 @@ song.addEventListener('timeupdate', function() {
 // song responding to seek click
 
 function seekTime(e) {
-	var percent = e.offsetX / this.offsetWidth;;
+	var percent = e.offsetX / seekBarLength.offsetWidth;;
     song.currentTime = percent * song.duration;
     console.log(song.duration);
     console.log(percent);
     console.log(song.currentTime);
     
-
     document.getElementById('fillTime').style.width = percent / 100;
 }
 
