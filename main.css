@@ -352,7 +352,7 @@ Responsive layout - makes the two columns stack on top of each other instead of 
     left: 50%;
 }
 
-/*  Seek bars  */
+/*  Seek bars  
 
 input[type=range] {
   -webkit-appearance: none;
@@ -439,3 +439,6 @@ input[type=range]:focus::-ms-fill-lower {
 input[type=range]:focus::-ms-fill-upper {
   background: rgba(231, 231, 231, 0.78);
 }
+ */
+
+ 
