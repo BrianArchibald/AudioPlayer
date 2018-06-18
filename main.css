@@ -194,6 +194,7 @@ Responsive layout - makes the two columns stack on top of each other instead of 
 .album-list .icon {
     background-color: none;
     border-radius: 50%;
+    font-size: 1.4rem;
 }
 
 .each-song{
