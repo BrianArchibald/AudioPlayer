@@ -113,12 +113,12 @@ document.getElementById('album-list').addEventListener('hover', function (event)
 
 function showIcon(songId) {
     if (song.pause) {
-        console.log(paused);
+        
         document.getElementsByClassName("playIcon")[songId].style.display = "inline-block";
         document.getElementsByClassName("pauseIcon")[songId].style.display = "none";
         document.getElementsByClassName("song-number")[songId].style.display = "none";
     } else {
-        console.log(play);
+        
         document.getElementsByClassName("playIcon")[songId].style.display = "none";
         document.getElementsByClassName("pauseIcon")[songId].style.display = "inline-block";
         document.getElementsByClassName("song-number")[songId].style.display = "none";
@@ -142,13 +142,16 @@ function playSong(index) {
     document.getElementsByClassName("playIcon")[currentSong].style.display = "none";
     document.getElementsByClassName("pauseIcon")[currentSong].style.display = "inline-block";
     document.getElementsByClassName("song-number")[currentSong].style.display = "none";
+
+    // extra trying to figure out icons
+    
+
+
     // PlayBar Icon
     document.getElementById("playBarPlayIcon").style.display = "none";
     document.getElementById("playBarPauseIcon").style.display = "inline-block";
 
-     
-     console.log(song.currentTime);
-     console.log('song.duration');
+
 }
 
 
@@ -256,7 +259,6 @@ function convertTime(seconds) {
 
 	sec = (sec < 10) ? '0' + sec : sec;
 	currentTime.textContent = min + ':' + sec;
-
 	totalTime(Math.round(song.duration));
 }
 
@@ -266,7 +268,6 @@ function totalTime(seconds) {
 
 	min = (min < 10) ? '0' + min : min;
 	sec = (sec < 10) ? '0' + sec : sec;
-	//songLength.textContent += '/' + min + ':' + sec;
 	songLength.textContent = min + ':' + sec;
 }
 
@@ -275,9 +276,12 @@ function next() {
     if (currentSong > jazzSampler.songs.length) {
         currentSong = 0;
     }
-    playSong();
-    document.getElementsByClassName('playIcon')[currentSong].style.display = "none";
-    document.getElementsByClassName("pauseIcon")[currentSong].style.display = "inline-block";
+    // document.getElementsByClassName("playIcon")[index].style.display = "none";
+    // document.getElementsByClassName("pauseIcon")[index].style.display = "none";
+    // showPlayOrPauseButton();
+    playSong(currentSong);
+    // document.getElementsByClassName('playIcon')[currentSong].style.display = "none";
+    // document.getElementsByClassName("pauseIcon")[currentSong].style.display = "inline-block";
 }
 
 function pre() {
@@ -285,9 +289,10 @@ function pre() {
     if (currentSong < 0) {
         currentSong = jazzSampler.songs.length;
     }
+    // showPlayOrPauseButton();
     playSong();
-    document.getElementByClassName('pauseIcon')[currentSong].style.display = "none";
-    document.getElementsByClassName("pauseIcon")[currentSong].style.display = "inline-block";
+    // document.getElementByClassName('pauseIcon')[currentSong].style.display = "none";
+    // document.getElementsByClassName("pauseIcon")[currentSong].style.display = "inline-block";
 }
 
 /// volume section 
