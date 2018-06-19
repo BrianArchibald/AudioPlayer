@@ -25,6 +25,7 @@ var seekThumb = document.getElementById('seekThumb');
 var volumeOn = document.getElementById('volume-high');
 var volumeOff = document.getElementById('volume-off');
 var thumbVolume = document.getElementById('thumbVolume');
+var totalTime = document.getElementById('total-time');
 
 let songsList = '';
 jazzSampler.songs.forEach((song, index) => {
@@ -38,6 +39,11 @@ jazzSampler.songs.forEach((song, index) => {
 		  </div>
 	`;
 });
+
+window.onload = function () {
+    song.volume = 0.5;
+    volumeBar.value = 0.5;
+}
 
 document.getElementsByClassName('album-list')[0].innerHTML = songsList;
 
@@ -120,12 +126,6 @@ function showIcon(songId) {
 }
 
 
-
-window.onload = function () {
-    song.volume = 0.5;
-    volumeBar.value = 0.5;
-}
-
 var song = new Audio();
 var currentSong = 0;
 
@@ -146,6 +146,8 @@ function playSong(index) {
     document.getElementById("playBarPlayIcon").style.display = "none";
     document.getElementById("playBarPauseIcon").style.display = "inline-block";
 
+     convertTime();
+     totalTime();
 
 }
 
@@ -220,6 +222,7 @@ function playOrPauseSong(index) {
 
 		// Update the song time
 		song.currentTime = time;
+       
 	});
 
 	// Update the seek bar as the song plays
@@ -255,6 +258,7 @@ function convertTime(seconds) {
     sec = (sec < 10) ? '0' + sec : sec;
     currentTime.textContent = min + ':' + sec;
     totalTime(Math.round(song.duration));
+    console.log("conv time working");
 }
 
 function totalTime(seconds) {
@@ -263,6 +267,7 @@ function totalTime(seconds) {
     min = (min < 10) ? '0' + min : min;
     sec = (sec < 10) ? '0' + sec : sec;
     currentTime.textContent += '/' + min + ':' + sec;
+    console.log("total time working");
 }
 
 function next() {
