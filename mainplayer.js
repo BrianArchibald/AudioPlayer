@@ -25,7 +25,7 @@ var seekThumb = document.getElementById('seekThumb');
 var volumeOn = document.getElementById('volume-high');
 var volumeOff = document.getElementById('volume-off');
 var thumbVolume = document.getElementById('thumbVolume');
-var totalTime = document.getElementById('total-time');
+var songLength = document.getElementById('songLength');
 
 let songsList = '';
 jazzSampler.songs.forEach((song, index) => {
@@ -146,9 +146,9 @@ function playSong(index) {
     document.getElementById("playBarPlayIcon").style.display = "none";
     document.getElementById("playBarPauseIcon").style.display = "inline-block";
 
-     convertTime();
-     totalTime();
-
+     
+     console.log(song.currentTime);
+     console.log('song.duration');
 }
 
 
@@ -229,7 +229,7 @@ function playOrPauseSong(index) {
 	song.addEventListener("timeupdate", function() {
 		// Calculate the slider value
 		var value = (100 / song.duration) * song.currentTime;
-
+		convertTime(Math.round(song.currentTime));
 		// Update the slider value
 		seekBar.value = value;
 	});
@@ -250,24 +250,24 @@ function playOrPauseSong(index) {
 		song.volume = volumeBar.value;
 	});
 
-
 function convertTime(seconds) {
-    var min = Math.floor(seconds / 60);
-    var sec = seconds % 60;
-    min = (min < 10) ? + min : min;
-    sec = (sec < 10) ? '0' + sec : sec;
-    currentTime.textContent = min + ':' + sec;
-    totalTime(Math.round(song.duration));
-    console.log("conv time working");
+	var min = Math.floor(seconds / 60);
+	var sec = seconds % 60;
+
+	sec = (sec < 10) ? '0' + sec : sec;
+	currentTime.textContent = min + ':' + sec;
+
+	totalTime(Math.round(song.duration));
 }
 
 function totalTime(seconds) {
-    var min = Math.floor(seconds / 60);
-    var sec = seconds % 60;
-    min = (min < 10) ? '0' + min : min;
-    sec = (sec < 10) ? '0' + sec : sec;
-    currentTime.textContent += '/' + min + ':' + sec;
-    console.log("total time working");
+	var min = Math.floor(seconds / 60);
+	var sec = seconds % 60;
+
+	min = (min < 10) ? '0' + min : min;
+	sec = (sec < 10) ? '0' + sec : sec;
+	//songLength.textContent += '/' + min + ':' + sec;
+	songLength.textContent = min + ':' + sec;
 }
 
 function next() {
