@@ -107,23 +107,23 @@ function showNumber(index) {
 }
 
 // show icon on songs when hover over song names
-document.getElementById('album-list').addEventListener('hover', function (event) {
-    showIcon(event.target);
-});
+// document.getElementById('album-list').addEventListener('hover', function (event) {
+//     showIcon(event.target);
+// });
 
-function showIcon(songId) {
-    if (song.pause) {
+// function showIcon(songId) {
+//     if (song.pause) {
         
-        document.getElementsByClassName("playIcon")[songId].style.display = "inline-block";
-        document.getElementsByClassName("pauseIcon")[songId].style.display = "none";
-        document.getElementsByClassName("song-number")[songId].style.display = "none";
-    } else {
+//         document.getElementsByClassName("playIcon")[songId].style.display = "inline-block";
+//         document.getElementsByClassName("pauseIcon")[songId].style.display = "none";
+//         document.getElementsByClassName("song-number")[songId].style.display = "none";
+//     } else {
         
-        document.getElementsByClassName("playIcon")[songId].style.display = "none";
-        document.getElementsByClassName("pauseIcon")[songId].style.display = "inline-block";
-        document.getElementsByClassName("song-number")[songId].style.display = "none";
-    }
-}
+//         document.getElementsByClassName("playIcon")[songId].style.display = "none";
+//         document.getElementsByClassName("pauseIcon")[songId].style.display = "inline-block";
+//         document.getElementsByClassName("song-number")[songId].style.display = "none";
+//     }
+// }
 
 
 var song = new Audio();
@@ -145,7 +145,6 @@ function playSong(index) {
 
     // extra trying to figure out icons
     
-
 
     // PlayBar Icon
     document.getElementById("playBarPlayIcon").style.display = "none";
@@ -272,6 +271,10 @@ function totalTime(seconds) {
 }
 
 function next() {
+    ////trying below to fix next
+    document.getElementsByClassName("playIcon")[currentSong].style.display = "none";
+    document.getElementsByClassName("pauseIcon")[currentSong].style.display = "none";
+    document.getElementsByClassName("song-number")[currentSong].style.display = "inline";
     currentSong++;
     if (currentSong > jazzSampler.songs.length) {
         currentSong = 0;
@@ -285,6 +288,9 @@ function next() {
 }
 
 function pre() {
+    document.getElementsByClassName("playIcon")[currentSong].style.display = "none";
+    document.getElementsByClassName("pauseIcon")[currentSong].style.display = "none";
+    document.getElementsByClassName("song-number")[currentSong].style.display = "inline";
     currentSong--;
     if (currentSong < 0) {
         currentSong = jazzSampler.songs.length;
