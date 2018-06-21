@@ -30,14 +30,14 @@ var songLength = document.getElementById('songLength');
 let songsList = '';
 jazzSampler.songs.forEach((song, index) => {
     songsList += `
-		 <div class="each-song" onmouseover='showPlayOrPauseButton(${index})' onmouseleave='showNumber(${index})'>
-		  <div class="song-number">${index + 1}</div> 
-		  <ion-icon name="play" class="playIcon" onclick="playOrPauseSong(${index})"></ion-icon>
-		  <ion-icon name="pause" class="pauseIcon" onclick="playOrPauseSong(${index})"></ion-icon>
-		  <div class="song-title">${song.title}</div>
-		  <div class="song-length">${song.duration}</div>
-		  </div>
-	`;
+         <div class="each-song" onmouseover='showPlayOrPauseButton(${index})' onmouseleave='showNumber(${index})'>
+          <div class="song-number">${index + 1}</div> 
+          <ion-icon name="play" class="playIcon" onclick="playOrPauseSong(${index})"></ion-icon>
+          <ion-icon name="pause" class="pauseIcon" onclick="playOrPauseSong(${index})"></ion-icon>
+          <div class="song-title">${song.title}</div>
+          <div class="song-length">${song.duration}</div>
+          </div>
+    `;
 });
 
 window.onload = function () {
@@ -82,6 +82,9 @@ function showPlayOrPauseButton(index) {
         }
     }
 
+
+    //////////////////////////////////////////////
+
     // if (currentSong === index && song.src && !song.paused) {
     //     node.children[0].style.display = 'none';
     //     node.children[1].style.display = 'none';
@@ -100,13 +103,43 @@ function showPlayOrPauseButton(index) {
 }
 
 function showNumber(index) {
-    let node = document.getElementsByClassName('each-song')[index];
-    node.children[0].style.display = 'inline';
-    node.children[1].style.display = 'none';
-    node.children[2].style.display = 'none';
+    let nodeTree = document.getElementsByClassName('each-song');
+    let node = nodeTree[index];
+
+    for (let i = 0; i < nodeTree.length; i++) {
+        nodeTree[i].children[0].style.display = 'inline';
+        nodeTree[i].children[1].style.display = 'none';
+        nodeTree[i].children[2].style.display = 'none';
+    }
+
+    if (!song.src) {
+        node.children[0].style.display = 'inline';
+        node.children[1].style.display = 'none';
+        node.children[2].style.display = 'none';
+    }
+    else {
+        if (currentSong === index) {
+            if (song.paused) {
+                node.children[0].style.display = 'none';
+                node.children[1].style.display = 'inline';
+                node.children[2].style.display = 'none';
+            }
+            else {
+                node.children[0].style.display = 'none';
+                node.children[1].style.display = 'none';
+                node.children[2].style.display = 'inline';
+            }
+        }
+        else {
+            node.children[0].style.display = 'inline';
+            node.children[1].style.display = 'none';
+            node.children[2].style.display = 'none';
+        }
+    }
 }
 
 // show icon on songs when hover over song names
+
 // document.getElementById('album-list').addEventListener('hover', function (event) {
 //     showIcon(event.target);
 // });
@@ -125,7 +158,6 @@ function showNumber(index) {
 //     }
 // }
 
-
 var song = new Audio();
 var currentSong = 0;
 
@@ -138,21 +170,16 @@ function playSong(index) {
     albumYear.textContent = jazzSampler.year;
 
     song.play();
-    //Song list icons
+    
+    // this will show each song icon when using pre and next 
     document.getElementsByClassName("playIcon")[currentSong].style.display = "none";
     document.getElementsByClassName("pauseIcon")[currentSong].style.display = "inline-block";
     document.getElementsByClassName("song-number")[currentSong].style.display = "none";
 
-    // extra trying to figure out icons
-    
-
     // PlayBar Icon
     document.getElementById("playBarPlayIcon").style.display = "none";
     document.getElementById("playBarPauseIcon").style.display = "inline-block";
-
-
 }
-
 
 function playOrPauseSong(index) {
     index === undefined ? (index = currentSong) : (currentSong = index);
@@ -202,10 +229,10 @@ function playOrPauseSong(index) {
 //  if(song){
 //   if(song.src && song.src.includes(jazzSampler.songs[index].audioUrl) && (song.currentTime > 0)){
 //    if(song.paused) { 
-//    	song.play();
+//      song.play();
 //    }
 //    else song.pause(); {
-//    		document.getElementsByClassName("playIcon")[0].style.display = "inline-block";
+//          document.getElementsByClassName("playIcon")[0].style.display = "inline-block";
 //         document.getElementsByClassName("pauseIcon")[0].style.display = "none";
 //    }
 //   } else {
@@ -218,60 +245,59 @@ function playOrPauseSong(index) {
 // }
 
 // Event listener for the seek bar
-	seekBar.addEventListener("change", function() {
-		// Calculate the new time
-		var time = song.duration * (seekBar.value / 100);
+    seekBar.addEventListener("change", function() {
+        // Calculate the new time
+        var time = song.duration * (seekBar.value / 100);
 
-		// Update the song time
-		song.currentTime = time;
+        // Update the song time
+        song.currentTime = time;
        
-	});
+    });
 
-	// Update the seek bar as the song plays
-	song.addEventListener("timeupdate", function() {
-		// Calculate the slider value
-		var value = (100 / song.duration) * song.currentTime;
-		convertTime(Math.round(song.currentTime));
-		// Update the slider value
-		seekBar.value = value;
-	});
+    // Update the seek bar as the song plays
+    song.addEventListener("timeupdate", function() {
+        // Calculate the slider value
+        var value = (100 / song.duration) * song.currentTime;
+        convertTime(Math.round(song.currentTime));
+        // Update the slider value
+        seekBar.value = value;
+    });
 
-	// Pause the song when the seek handle is being dragged
-	seekBar.addEventListener("mousedown", function() {
-		song.pause();
-	});
+    // Pause the song when the seek handle is being dragged
+    seekBar.addEventListener("mousedown", function() {
+        song.pause();
+    });
 
-	// Play the song when the seek handle is dropped
-	seekBar.addEventListener("mouseup", function() {
-		song.play();
-	});
+    // Play the song when the seek handle is dropped
+    seekBar.addEventListener("mouseup", function() {
+        song.play();
+    });
 
-	// Event listener for the volume bar
-	volumeBar.addEventListener("change", function() {
-		// Update the song volume
-		song.volume = volumeBar.value;
-	});
+    // Event listener for the volume bar
+    volumeBar.addEventListener("change", function() {
+        // Update the song volume
+        song.volume = volumeBar.value;
+    });
 
 function convertTime(seconds) {
-	var min = Math.floor(seconds / 60);
-	var sec = seconds % 60;
+    var min = Math.floor(seconds / 60);
+    var sec = seconds % 60;
 
-	sec = (sec < 10) ? '0' + sec : sec;
-	currentTime.textContent = min + ':' + sec;
-	totalTime(Math.round(song.duration));
+    sec = (sec < 10) ? '0' + sec : sec;
+    currentTime.textContent = min + ':' + sec;
+    totalTime(Math.round(song.duration));
 }
 
 function totalTime(seconds) {
-	var min = Math.floor(seconds / 60);
-	var sec = seconds % 60;
+    var min = Math.floor(seconds / 60);
+    var sec = seconds % 60;
 
-	min = (min < 10) ? '0' + min : min;
-	sec = (sec < 10) ? '0' + sec : sec;
-	songLength.textContent = min + ':' + sec;
+    min = (min < 10) ? '0' + min : min;
+    sec = (sec < 10) ? '0' + sec : sec;
+    songLength.textContent = min + ':' + sec;
 }
 
 function next() {
-    ////trying below to fix next
     document.getElementsByClassName("playIcon")[currentSong].style.display = "none";
     document.getElementsByClassName("pauseIcon")[currentSong].style.display = "none";
     document.getElementsByClassName("song-number")[currentSong].style.display = "inline";
@@ -279,12 +305,7 @@ function next() {
     if (currentSong > jazzSampler.songs.length) {
         currentSong = 0;
     }
-    // document.getElementsByClassName("playIcon")[index].style.display = "none";
-    // document.getElementsByClassName("pauseIcon")[index].style.display = "none";
-    // showPlayOrPauseButton();
     playSong(currentSong);
-    // document.getElementsByClassName('playIcon')[currentSong].style.display = "none";
-    // document.getElementsByClassName("pauseIcon")[currentSong].style.display = "inline-block";
 }
 
 function pre() {
@@ -295,10 +316,7 @@ function pre() {
     if (currentSong < 0) {
         currentSong = jazzSampler.songs.length;
     }
-    // showPlayOrPauseButton();
     playSong();
-    // document.getElementByClassName('pauseIcon')[currentSong].style.display = "none";
-    // document.getElementsByClassName("pauseIcon")[currentSong].style.display = "inline-block";
 }
 
 /// volume section 
