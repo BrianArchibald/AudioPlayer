@@ -193,6 +193,7 @@ function playOrPauseSong(index) {
                 document.getElementsByClassName("playIcon")[index].style.display = "none";
                 document.getElementsByClassName("pauseIcon")[index].style.display = "inline";
                 document.getElementsByClassName("song-number")[index].style.display = "none";
+
                 document.getElementById("playBarPlayIcon").style.display = "none";
                 document.getElementById("playBarPauseIcon").style.display = "inline-block";
                 song.play();
@@ -202,6 +203,7 @@ function playOrPauseSong(index) {
                 document.getElementsByClassName("playIcon")[index].style.display = "inline";
                 document.getElementsByClassName("pauseIcon")[index].style.display = "none";
                 document.getElementsByClassName("song-number")[index].style.display = "none";
+                
                 document.getElementById("playBarPlayIcon").style.display = "inline-block";
                 document.getElementById("playBarPauseIcon").style.display = "none";
                 song.pause();
@@ -249,9 +251,9 @@ function playOrPauseSong(index) {
         // Calculate the new time
         var time = song.duration * (seekBar.value / 100);
 
-        // Update the song time
+        //Update the song time
         song.currentTime = time;
-       
+        console.log('seekbar change');      
     });
 
     // Update the seek bar as the song plays
@@ -259,8 +261,11 @@ function playOrPauseSong(index) {
         // Calculate the slider value
         var value = (100 / song.duration) * song.currentTime;
         convertTime(Math.round(song.currentTime));
-        // Update the slider value
-        seekBar.value = value;
+
+        // Update the slider value when song loads
+        value > 0 ? seekBar.value = value : value = 0;
+
+        //seekBar.value = value
     });
 
     // Pause the song when the seek handle is being dragged
@@ -294,7 +299,9 @@ function totalTime(seconds) {
 
     min = (min < 10) ? '0' + min : min;
     sec = (sec < 10) ? '0' + sec : sec;
-    songLength.textContent = min + ':' + sec;
+    // set songlength to 0:00 until the song length is loaded
+    sec > 0 ? songLength.textContent = min + ':' + sec : songLength.textContent = "0:00";
+
 }
 
 function next() {
