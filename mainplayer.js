@@ -105,10 +105,7 @@ function showPlayOrPauseButton(index) {
 function showNumber(index) {
     let nodeTree = document.getElementsByClassName('each-song');
     let node = nodeTree[index];
-
-    console.log(node);
-
-    
+  
     for (let i = 0; i < nodeTree.length; i++) {
         nodeTree[i].children[0].style.display = 'inline';
         nodeTree[i].children[1].style.display = 'none';
@@ -132,8 +129,6 @@ function showNumber(index) {
                 node.children[0].style.display = 'none';
                 node.children[1].style.display = 'none';
                 node.children[2].style.display = 'inline';
-                
-            
             }
         }
         else {
@@ -146,18 +141,15 @@ function showNumber(index) {
         document.getElementsByClassName("playIcon")[currentSong].style.display = "inline-block";
         document.getElementsByClassName("pauseIcon")[currentSong].style.display = "none";
         document.getElementsByClassName("song-number")[currentSong].style.display = "none";
-        document.getElementById("playBarPlayIcon").style.display = "inline-block";
-        document.getElementById("playBarPauseIcon").style.display = "none";
+        // document.getElementById("playBarPlayIcon").style.display = "inline-block";
+        // document.getElementById("playBarPauseIcon").style.display = "none";
     }else{
         document.getElementsByClassName("playIcon")[currentSong].style.display = "none";
         document.getElementsByClassName("pauseIcon")[currentSong].style.display = "inline-block";
         document.getElementsByClassName("song-number")[currentSong].style.display = "none";
-        document.getElementById("playBarPlayIcon").style.display = "none";
-        document.getElementById("playBarPauseIcon").style.display = "inline-block";
+        // document.getElementById("playBarPlayIcon").style.display = "none";
+        // document.getElementById("playBarPauseIcon").style.display = "inline-block";
     }
-
-    
-
 }
 
 // show icon on songs when hover over song names
@@ -272,8 +264,7 @@ function playOrPauseSong(index) {
         var time = song.duration * (seekBar.value / 100);
 
         // Update the song time
-        song.currentTime = time;
-       
+        song.currentTime = time;  
     });
 
     // Update the seek bar as the song plays
@@ -283,6 +274,10 @@ function playOrPauseSong(index) {
         convertTime(Math.round(song.currentTime));
         // Update the slider value
         seekBar.value = value;
+
+        if(song.ended) {
+        next();
+        }
     });
 
     // Pause the song when the seek handle is being dragged
