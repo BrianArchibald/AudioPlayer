@@ -152,26 +152,6 @@ function showNumber(index) {
     }
 }
 
-// show icon on songs when hover over song names
-
-// document.getElementById('album-list').addEventListener('hover', function (event) {
-//     showIcon(event.target);
-// });
-
-// function showIcon(songId) {
-//     if (song.pause) {
-        
-//         document.getElementsByClassName("playIcon")[songId].style.display = "inline-block";
-//         document.getElementsByClassName("pauseIcon")[songId].style.display = "none";
-//         document.getElementsByClassName("song-number")[songId].style.display = "none";
-//     } else {
-        
-//         document.getElementsByClassName("playIcon")[songId].style.display = "none";
-//         document.getElementsByClassName("pauseIcon")[songId].style.display = "inline-block";
-//         document.getElementsByClassName("song-number")[songId].style.display = "none";
-//     }
-// }
-
 var song = new Audio();
 var currentSong = 0;
 
@@ -239,25 +219,6 @@ function playOrPauseSong(index) {
     }
 }
 
-// function playOrPauseSong(index) {
-//  if(song){
-//   if(song.src && song.src.includes(jazzSampler.songs[index].audioUrl) && (song.currentTime > 0)){
-//    if(song.paused) { 
-//      song.play();
-//    }
-//    else song.pause(); {
-//          document.getElementsByClassName("playIcon")[0].style.display = "inline-block";
-//         document.getElementsByClassName("pauseIcon")[0].style.display = "none";
-//    }
-//   } else {
-//    playSong();
-
-//             document.getElementsByClassName("playIcon")[0].style.display = "none";
-//             document.getElementsByClassName("pauseIcon")[0].style.display = "inline-block";
-//   }
-//  }
-// }
-
 // Event listener for the seek bar
     seekBar.addEventListener("change", function() {
         // Calculate the new time
@@ -276,6 +237,9 @@ function playOrPauseSong(index) {
         seekBar.value = value;
 
         if(song.ended) {
+            // if (currentSong > jazzSampler.songs.length) {
+            // currentSong = 0;
+            // }
         next();
         }
     });
@@ -336,7 +300,6 @@ function pre() {
     playSong();
 }
 
-/// volume section 
 function enableMute() {
     song.muted = true;
     document.getElementById('volume-high').style.display = "none";
