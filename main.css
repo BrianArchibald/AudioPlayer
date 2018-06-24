@@ -9,8 +9,8 @@ html {
      color: grey;             
      min-height: 100%; 
      margin: 0;
-
-     background: #4f4a39;
+     background: #222831;
+     /*background: #4f4a39; */
      background-repeat: repeat;
      background-position: center center;
      background-size: cover;
@@ -21,7 +21,9 @@ html {
      display: grid;
      grid-template-columns: 1fr 1fr;
      padding: 1rem;
-     background-color: rgb(122, 110, 110, 0.87);
+     background-color: #393e46;
+
+     /*background-color: rgb(122, 110, 110, 0.87);*/
      z-index: 1;
      padding: 15px 60px 15px 60px;
  }
@@ -48,11 +50,12 @@ html {
 #library-link {
     align-self: center;
     text-align: right;
+
 }
 
 #library-link a {
     text-decoration: none;
-    color: #e8b500;
+    color: grey;
     font-size: 20px;
     font-weight: bold;
 }
@@ -96,17 +99,16 @@ html {
 .library-container{
      display: grid;
      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-     grid-gap: 30px;
-     margin: 20px;
-     background-color: none;
+     grid-gap: 60px;
+     margin: 60px;
      color: #444;
      justify-content: center;
 }
 
 .album-collection-container{
      display: grid;
-     background-color: #444;
-     color: #fff;
+     background-color: #eeeeee;
+     
      border-radius: 5px;
      padding: 20px;
      font-size: 1.5rem;
@@ -117,7 +119,7 @@ html {
 
 .album-collection-container a{
     text-decoration: none;
-    color: #e8b500;
+    
 }
 
 .album-collection-container img{
@@ -162,7 +164,7 @@ Responsive layout - makes the two columns stack on top of each other instead of 
     display: grid;
     grid-template-rows: 40% 20% 10%;
     justify-content: left;
-    
+    color: #00adb5;
     font-weight: 300;
     font-size: 1.5rem;
 }
