@@ -234,13 +234,12 @@ function playOrPauseSong(index) {
         var value = (100 / song.duration) * song.currentTime;
         convertTime(Math.round(song.currentTime));
         // Update the slider value
-        seekBar.value = value;
+        //seekBar.value = value;
+
+        value > 0 ? seekBar.value = value : value = 0;
 
         if(song.ended) {
-            // if (currentSong > jazzSampler.songs.length) {
-            // currentSong = 0;
-            // }
-        next();
+            next();
         }
     });
 
@@ -275,7 +274,11 @@ function totalTime(seconds) {
 
     min = (min < 10) ? '0' + min : min;
     sec = (sec < 10) ? '0' + sec : sec;
-    songLength.textContent = min + ':' + sec;
+
+    // set songlength to 0:00 until the song length is loaded
+    sec > 0 ? songLength.textContent = min + ':' + sec : songLength.textContent = "0:00";
+
+    //songLength.textContent = min + ':' + sec;
 }
 
 function next() {
@@ -283,9 +286,14 @@ function next() {
     document.getElementsByClassName("pauseIcon")[currentSong].style.display = "none";
     document.getElementsByClassName("song-number")[currentSong].style.display = "inline";
     currentSong++;
-    if (currentSong > jazzSampler.songs.length) {
+    // if (currentSong > jazzSampler.songs.length) {
+    //     currentSong = 0;
+    // }
+
+    if (currentSong > 6) {
         currentSong = 0;
     }
+
     playSong(currentSong);
 }
 
@@ -294,9 +302,13 @@ function pre() {
     document.getElementsByClassName("pauseIcon")[currentSong].style.display = "none";
     document.getElementsByClassName("song-number")[currentSong].style.display = "inline";
     currentSong--;
+    // if (currentSong < 0) {
+    //     currentSong = jazzSampler.songs.length;
+    // }
     if (currentSong < 0) {
-        currentSong = jazzSampler.songs.length;
+        currentSong = 6;
     }
+
     playSong();
 }
 
