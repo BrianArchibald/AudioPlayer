@@ -74,6 +74,7 @@ function showPlayOrPauseButton(index) {
                 node.children[1].style.display = 'none';
                 node.children[2].style.display = 'inline';
             }
+           
         }
         else {
             node.children[0].style.display = 'none';
@@ -130,6 +131,22 @@ function showNumber(index) {
                 node.children[1].style.display = 'none';
                 node.children[2].style.display = 'inline';
             }
+
+            //  if (song.paused && song.currentTime > 0) {
+            //     node.children[0].style.display = 'none';
+            //     node.children[1].style.display = 'inline';
+            //     node.children[2].style.display = 'none'; 
+            // }
+            // else if (song.paused && song.currentTime == 0) {
+            //     node.children[0].style.display = 'inline';
+            //     node.children[1].style.display = 'none';
+            //     node.children[2].style.display = 'none';
+            // }
+            // else {
+            //     node.children[0].style.display = 'none';
+            //     node.children[1].style.display = 'none';
+            //     node.children[2].style.display = 'inline';
+            // }
         }
         else {
             node.children[0].style.display = 'inline';
@@ -147,6 +164,7 @@ function showNumber(index) {
         document.getElementsByClassName("playIcon")[currentSong].style.display = "none";
         document.getElementsByClassName("pauseIcon")[currentSong].style.display = "inline-block";
         document.getElementsByClassName("song-number")[currentSong].style.display = "none";
+
         // document.getElementById("playBarPlayIcon").style.display = "none";
         // document.getElementById("playBarPauseIcon").style.display = "inline-block";
     }
@@ -219,12 +237,18 @@ function playOrPauseSong(index) {
     }
 }
 
-// Event listener for the seek bar
+    // Event listener for the seek bar
     seekBar.addEventListener("change", function() {
         // Calculate the new time
-        var time = song.duration * (seekBar.value / 100);
+        let time = song.duration * (seekBar.value / 100);
 
         // Update the song time
+        song.currentTime = time;  
+    });
+
+    // Seek bar responding to click
+    seekBar.addEventListener("click", function(e) {
+        let time = song.duration * (e.offsetX / e.target.offsetWidth);
         song.currentTime = time;  
     });
 
