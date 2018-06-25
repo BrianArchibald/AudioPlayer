@@ -58,29 +58,29 @@ function showPlayOrPauseButton(index) {
     }
 
     if (!song.src) {
-        node.children[0].style.display = 'none';
-        node.children[1].style.display = 'inline';
-        node.children[2].style.display = 'none';
+        // node.children[0].style.display = 'none';
+        // node.children[1].style.display = 'inline';
+        // node.children[2].style.display = 'none';
+        hideAndShowButtons('play', node);
     }
     else {
         if (currentSong === index) {
             if (song.paused) {
-                node.children[0].style.display = 'none';
-                node.children[1].style.display = 'inline';
-                node.children[2].style.display = 'none';
+                // node.children[0].style.display = 'none';
+                // node.children[1].style.display = 'inline';
+                // node.children[2].style.display = 'none';
+                hideAndShowButtons('play', node);
             }
             else {
-                node.children[0].style.display = 'none';
-                node.children[1].style.display = 'none';
-                node.children[2].style.display = 'inline';
+                hideAndShowButtons('pause', node);
             }
-           
         }
         else {
-            node.children[0].style.display = 'none';
-            node.children[1].style.display = 'inline';
-            node.children[2].style.display = 'none';
-        }
+            // node.children[0].style.display = 'none';
+            // node.children[1].style.display = 'inline';
+            // node.children[2].style.display = 'none';
+            hideAndShowButtons('play', node);
+          }
     }
 
 
@@ -101,6 +101,21 @@ function showPlayOrPauseButton(index) {
     //     node.children[1].style.display = 'inline';
     //     node.children[2].style.display = 'none';
     // }
+}
+
+function hideAndShowButtons(action, node){
+  switch(action){
+    case 'play': 
+      node.children[0].style.display = 'none';
+      node.children[1].style.display = 'inline';
+      node.children[2].style.display = 'none';
+      break;
+    case 'pause': 
+      node.children[0].style.display = 'none';
+      node.children[1].style.display = 'none';
+      node.children[2].style.display = 'inline';
+      break;
+  }
 }
 
 function showNumber(index) {
@@ -131,22 +146,6 @@ function showNumber(index) {
                 node.children[1].style.display = 'none';
                 node.children[2].style.display = 'inline';
             }
-
-            //  if (song.paused && song.currentTime > 0) {
-            //     node.children[0].style.display = 'none';
-            //     node.children[1].style.display = 'inline';
-            //     node.children[2].style.display = 'none'; 
-            // }
-            // else if (song.paused && song.currentTime == 0) {
-            //     node.children[0].style.display = 'inline';
-            //     node.children[1].style.display = 'none';
-            //     node.children[2].style.display = 'none';
-            // }
-            // else {
-            //     node.children[0].style.display = 'none';
-            //     node.children[1].style.display = 'none';
-            //     node.children[2].style.display = 'inline';
-            // }
         }
         else {
             node.children[0].style.display = 'inline';
@@ -154,20 +153,19 @@ function showNumber(index) {
             node.children[2].style.display = 'none';
         }
     }
-    if(song.paused){
-        document.getElementsByClassName("playIcon")[currentSong].style.display = "inline-block";
-        document.getElementsByClassName("pauseIcon")[currentSong].style.display = "none";
-        document.getElementsByClassName("song-number")[currentSong].style.display = "none";
-        // document.getElementById("playBarPlayIcon").style.display = "inline-block";
-        // document.getElementById("playBarPauseIcon").style.display = "none";
-    }else{
-        document.getElementsByClassName("playIcon")[currentSong].style.display = "none";
-        document.getElementsByClassName("pauseIcon")[currentSong].style.display = "inline-block";
-        document.getElementsByClassName("song-number")[currentSong].style.display = "none";
-
-        // document.getElementById("playBarPlayIcon").style.display = "none";
-        // document.getElementById("playBarPauseIcon").style.display = "inline-block";
-    }
+    // if(song.paused){
+    //     document.getElementsByClassName("playIcon")[currentSong].style.display = "inline-block";
+    //     document.getElementsByClassName("pauseIcon")[currentSong].style.display = "none";
+    //     document.getElementsByClassName("song-number")[currentSong].style.display = "none";
+    //     // document.getElementById("playBarPlayIcon").style.display = "inline-block";
+    //     // document.getElementById("playBarPauseIcon").style.display = "none";
+    // }else{
+    //     document.getElementsByClassName("playIcon")[currentSong].style.display = "none";
+    //     document.getElementsByClassName("pauseIcon")[currentSong].style.display = "inline-block";
+    //     document.getElementsByClassName("song-number")[currentSong].style.display = "none";
+    //     // document.getElementById("playBarPlayIcon").style.display = "none";
+    //     // document.getElementById("playBarPauseIcon").style.display = "inline-block";
+    // }
 }
 
 var song = new Audio();
@@ -237,20 +235,22 @@ function playOrPauseSong(index) {
     }
 }
 
-    // Event listener for the seek bar
+// Event listener for the seek bar
     seekBar.addEventListener("change", function() {
         // Calculate the new time
-        let time = song.duration * (seekBar.value / 100);
-
+        var time = song.duration * (seekBar.value / 100);
         // Update the song time
         song.currentTime = time;  
     });
 
-    // Seek bar responding to click
     seekBar.addEventListener("click", function(e) {
-        let time = song.duration * (e.offsetX / e.target.offsetWidth);
-        song.currentTime = time;  
-    });
+      // Calculate the new time
+      let time = song.duration * (event.offsetX / event.target.scrollWidth);
+      // var time = song.duration * position;
+      // console.log(song.duration)
+      // Update the song time
+      song.currentTime = time;  
+  });
 
     // Update the seek bar as the song plays
     song.addEventListener("timeupdate", function() {
@@ -310,9 +310,14 @@ function next() {
     document.getElementsByClassName("pauseIcon")[currentSong].style.display = "none";
     document.getElementsByClassName("song-number")[currentSong].style.display = "inline";
     currentSong++;
-    if (currentSong + 1 > jazzSampler.songs.length) { 
+    // if (currentSong > jazzSampler.songs.length) {
+    //     currentSong = 0;
+    // }
+
+    if (currentSong > 6) {
         currentSong = 0;
     }
+
     playSong(currentSong);
 }
 
@@ -320,10 +325,14 @@ function pre() {
     document.getElementsByClassName("playIcon")[currentSong].style.display = "none";
     document.getElementsByClassName("pauseIcon")[currentSong].style.display = "none";
     document.getElementsByClassName("song-number")[currentSong].style.display = "inline";
-    currentSong--;    
+    currentSong--;
+    // if (currentSong < 0) {
+    //     currentSong = jazzSampler.songs.length;
+    // }
     if (currentSong < 0) {
-        currentSong = 0;
+        currentSong = 6;
     }
+
     playSong();
 }
 
