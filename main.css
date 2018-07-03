@@ -65,9 +65,9 @@ html {
 
  .landing{
     position: relative; 
-    background-image: url('guitar.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('guitar.jpg');
     background-repeat: no-repeat;
-    background-position: center center;
+    background-position: center;
     background-size: cover;
     
 }
@@ -86,8 +86,8 @@ html {
     width: 100%;                    
     text-align: center;
     font-size: 4rem;             
-    font-weight: 300; 
-    color: #ffffff;              
+     
+    color: #edbb25;              
     text-transform: uppercase;      
     letter-spacing: 0.4rem;         
     text-shadow: 1px 1px 0px rgb(58,23,63);  

@@ -153,19 +153,19 @@ function showNumber(index) {
             node.children[2].style.display = 'none';
         }
     }
-    // if(song.paused){
-    //     document.getElementsByClassName("playIcon")[currentSong].style.display = "inline-block";
-    //     document.getElementsByClassName("pauseIcon")[currentSong].style.display = "none";
-    //     document.getElementsByClassName("song-number")[currentSong].style.display = "none";
-    //     // document.getElementById("playBarPlayIcon").style.display = "inline-block";
-    //     // document.getElementById("playBarPauseIcon").style.display = "none";
-    // }else{
-    //     document.getElementsByClassName("playIcon")[currentSong].style.display = "none";
-    //     document.getElementsByClassName("pauseIcon")[currentSong].style.display = "inline-block";
-    //     document.getElementsByClassName("song-number")[currentSong].style.display = "none";
-    //     // document.getElementById("playBarPlayIcon").style.display = "none";
-    //     // document.getElementById("playBarPauseIcon").style.display = "inline-block";
-    // }
+    if(song.paused){
+        document.getElementsByClassName("playIcon")[currentSong].style.display = "inline-block";
+        document.getElementsByClassName("pauseIcon")[currentSong].style.display = "none";
+        document.getElementsByClassName("song-number")[currentSong].style.display = "none";
+        // document.getElementById("playBarPlayIcon").style.display = "inline-block";
+        // document.getElementById("playBarPauseIcon").style.display = "none";
+    }else{
+        document.getElementsByClassName("playIcon")[currentSong].style.display = "none";
+        document.getElementsByClassName("pauseIcon")[currentSong].style.display = "inline-block";
+        document.getElementsByClassName("song-number")[currentSong].style.display = "none";
+        // document.getElementById("playBarPlayIcon").style.display = "none";
+        // document.getElementById("playBarPauseIcon").style.display = "inline-block";
+    }
 }
 
 var song = new Audio();
