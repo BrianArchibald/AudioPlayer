@@ -467,11 +467,14 @@ input[type=range]:focus::-ms-fill-upper {
   }
   .library-container {
     display: grid;
-    grid-template-columns: 50vh;
+    grid-template-columns: 1fr;
     grid-gap: 60px;
     margin: 60px;
     color: #444;
     justify-content: center;
+  }
+  .player-control {
+    background-color: rgb(15, 8, 84, 0.7);
   }
 }
 
@@ -509,4 +512,14 @@ input[type=range]:focus::-ms-fill-upper {
     width: 90%;
   }
 }
-
+@media (max-width: 387px) {
+  .control-container {
+    grid-template-columns: 3fr 4fr;
+  }
+  .controls.volume {
+    display: none;
+  }
+  .seek-control {
+    margin-right: 4vh;
+  }
+}
