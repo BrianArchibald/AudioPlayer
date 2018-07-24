@@ -1,65 +1,91 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Audio Player</title>
+	<link rel="stylesheet" type="text/css" href="main.css">
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/5.3.0/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/5.3.0/firebase-auth.js"></script>
-    <script defer src="/__/firebase/5.3.0/firebase-database.js"></script>
-    <script defer src="/__/firebase/5.3.0/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/5.3.0/firebase-storage.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
+</head>
+<body class="player">
+	<nav class="navbar">
+		<a href="index.html" class="logo">		
+			<img src="logo.png">		
+		</a>
+		<div class="nav-library">
+			<div id="library-link">
+				<a href="library.html">Music Library</a>
+			</div>
+		</div>
+	</nav>       <!-- End of Navigation -->
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+	<main class="main">
+		<div class="main-top">
+			<div class="album-art">
+				<img src="jazzband.jpg">
+			</div>
+			<div class="album-details">
+				<h2 class="album-title" id="album-title"></h2>
+				<h4 class="album-artist" id="album-artist"></h3>
+				<h5 class="album-year" id="album-year"></h5>
+			</div>
+		</div>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+		<div class="album-list" id="album-list">
+		</div>   <!-- End of Album List -->
+	</main>  <!-- End of Main Section -->
 
-        try {
-          let app = firebase.app();
-          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
-          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-  </body>
+	<section class="player-control">
+		<div class="control-container">
+			<div class="controls main-playback">
+				<a class="previous">
+					<ion-icon name="rewind" id="rewind" onclick="pre()"></ion-icon>
+				</a>
+				<a class="play-pause">
+					<ion-icon name="play" class="playIcon" id="playBarPlayIcon" onclick="playOrPauseSong()"></ion-icon>
+					<ion-icon name="pause" class="pauseIcon" id="playBarPauseIcon" onclick="playOrPauseSong()"></ion-icon>
+				</a>
+				<a class="next">
+					<ion-icon name="fastforward" id="fastforward" onclick="next()"></ion-icon>
+				</a>
+			</div>
+
+			<div class="seek-control">
+				<div class="seek-title" id="songTitle"></div>
+				<div class="seek-range">
+					<input type="range" class="seek-bar-length" id="seekBar" value="0">
+				</div>
+				<div class="song-times">
+					<div class="current-time" id="currentTime"></div>
+					<div class="total-time" id="songLength"></div>
+				</div>
+				<div class="seek-artist" id="seekArtist"></div>
+			</div>
+
+			<div class="controls-volume">
+				<ion-icon name="volume-high" id="volume-high" onclick="enableMute()"></ion-icon>
+				<ion-icon name="volume-off" id="volume-off" onclick="disableMute()"></ion-icon>
+				<div class="volume-range">
+					<input type="range" id="volumeBar" class="seek-bar-volume" min="0" max="1" step="0.1" value="1">
+				</div>
+			</div>
+		</div>
+	</section>  <!-- End of playbar sections -->
+	
+	<script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyCY83ivGigfbgGy4muRbEjqMSkZa45GPEY",
+	    authDomain: "music-box-f835a.firebaseapp.com",
+	    databaseURL: "https://music-box-f835a.firebaseio.com",
+	    projectId: "music-box-f835a",
+	    storageBucket: "",
+	    messagingSenderId: "617238322734"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+	<script type="text/javascript" src="mainplayer.js"></script>
+	<script src="https://unpkg.com/ionicons@4.1.2/dist/ionicons.js"></script>
+</body>
 </html>
