@@ -1,0 +1,59 @@
+[debug] [2018-07-25T02:04:59.107Z] ----------------------------------------------------------------------
+[debug] [2018-07-25T02:04:59.111Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\kmd10\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase init
+[debug] [2018-07-25T02:04:59.111Z] CLI Version:   3.19.3
+[debug] [2018-07-25T02:04:59.111Z] Platform:      win32
+[debug] [2018-07-25T02:04:59.111Z] Node Version:  v8.11.3
+[debug] [2018-07-25T02:04:59.112Z] Time:          Tue Jul 24 2018 21:04:59 GMT-0500 (Central Daylight Time)
+[debug] [2018-07-25T02:04:59.112Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-07-25T02:04:59.122Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] [2018-07-25T02:04:59.123Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\kmd10\Documents\GitHub\AudioPlayer
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2018-07-25T02:05:09.474Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-07-25T02:05:09.474Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/--CFbIfYRLZD0g0bbOK2SPtqlPICB9aEj_bm5y6J1tk',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Tue Jul 24 2018 21:05:09 GMT-0500 (Central Daylight Time)
+[debug] [2018-07-25T02:05:09.794Z] <<< HTTP RESPONSE 200
+[debug] [2018-07-25T02:05:09.848Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects  
+  
+ Tue Jul 24 2018 21:05:09 GMT-0500 (Central Daylight Time)
+[debug] [2018-07-25T02:05:10.400Z] <<< HTTP RESPONSE 200
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[info] +  Wrote public/404.html
+[debug] [2018-07-25T02:07:39.359Z] >>> HTTP REQUEST GET https://www.gstatic.com/firebasejs/releases.json  
+  
+ Tue Jul 24 2018 21:07:39 GMT-0500 (Central Daylight Time)
+[debug] [2018-07-25T02:07:39.550Z] <<< HTTP RESPONSE 200
+[info] +  Wrote public/index.html
+[info] 
+[info] i  Writing configuration info to firebase.json...
+[info] i  Writing project information to .firebaserc...
+[info] 
+[info] +  Firebase initialization complete!
