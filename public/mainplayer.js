@@ -14,18 +14,19 @@ const jazzSampler = {
     ]
 };
 
-var songTitle = document.getElementById('songTitle');
-var fillTime = document.getElementById('fillTime');
-var currentTime = document.getElementById('currentTime');
-var seekArtist = document.getElementById('seekArtist');
-var albumTitle = document.getElementById('album-title');
-var albumArtist = document.getElementById('album-artist');
-var albumYear = document.getElementById('album-year');
-var seekThumb = document.getElementById('seekThumb');
-var volumeOn = document.getElementById('volume-high');
-var volumeOff = document.getElementById('volume-off');
-var thumbVolume = document.getElementById('thumbVolume');
-var songLength = document.getElementById('songLength');
+const songTitle = document.getElementById('songTitle');
+const fillTime = document.getElementById('fillTime');
+const currentTime = document.getElementById('currentTime');
+const seekArtist = document.getElementById('seekArtist');
+const albumTitle = document.getElementById('album-title');
+const albumArtist = document.getElementById('album-artist');
+const albumYear = document.getElementById('album-year');
+const seekThumb = document.getElementById('seekThumb');
+const volumeOn = document.getElementById('volume-high');
+const volumeOff = document.getElementById('volume-off');
+const thumbVolume = document.getElementById('thumbVolume');
+const songLength = document.getElementById('songLength');
+
 
 let songsList = '';
 jazzSampler.songs.forEach((song, index) => {
@@ -71,7 +72,7 @@ function showPlayOrPauseButton(index) {
         }
         else {
             hideAndShowButtons('play', node);
-          }
+        }
     }
 }
 
@@ -136,8 +137,8 @@ function showNumber(index) {
     }
 }
 
-var song = new Audio();
-var currentSong = 0;
+let song = new Audio();
+let currentSong = 0;
 
 function playSong(index) {
     song.src = jazzSampler.songs[currentSong].audioUrl;
@@ -176,7 +177,6 @@ function playOrPauseSong(index) {
                 song.play();
             }
             else {
-
                 document.getElementsByClassName("playIcon")[index].style.display = "inline";
                 document.getElementsByClassName("pauseIcon")[index].style.display = "none";
                 document.getElementsByClassName("song-number")[index].style.display = "none";
@@ -203,7 +203,7 @@ function playOrPauseSong(index) {
     }
 }
 
-// Event listener for the seek bar
+    // Event listener for the seek bar
     seekBar.addEventListener("change", function() {
         // Calculate the new time
         var time = song.duration * (seekBar.value / 100);
@@ -217,22 +217,25 @@ function playOrPauseSong(index) {
       // Update the song time
       song.currentTime = time;  
   });
+
     // Update the seek bar as the song plays
     song.addEventListener("timeupdate", function() {
         // Calculate the slider value
         var value = (100 / song.duration) * song.currentTime;
         convertTime(Math.round(song.currentTime));
         // Update the slider value
-
         value > 0 ? seekBar.value = value : value = 0;
+
         if(song.ended) {
             next();
         }
     });
+
     // Pause the song when the seek handle is being dragged
     seekBar.addEventListener("mousedown", function() {
         song.pause();
     });
+
     // Play the song when the seek handle is dropped
     seekBar.addEventListener("mouseup", function() {
         song.play();
@@ -245,8 +248,8 @@ function playOrPauseSong(index) {
     });
 
 function convertTime(seconds) {
-    var min = Math.floor(seconds / 60);
-    var sec = seconds % 60;
+    let min = Math.floor(seconds / 60);
+    let sec = seconds % 60;
 
     sec = (sec < 10) ? '0' + sec : sec;
     currentTime.textContent = min + ':' + sec;
@@ -254,12 +257,13 @@ function convertTime(seconds) {
 }
 
 function totalTime(seconds) {
-    var min = Math.floor(seconds / 60);
-    var sec = seconds % 60;
+    let min = Math.floor(seconds / 60);
+    let sec = seconds % 60;
 
     min = (min < 10) ? '0' + min : min;
     sec = (sec < 10) ? '0' + sec : sec;
 
+    // set songlength to 0:00 until the song length is loaded
     sec > 0 ? songLength.textContent = min + ':' + sec : songLength.textContent = "0:00";
 }
 
@@ -280,7 +284,6 @@ function pre() {
     document.getElementsByClassName("pauseIcon")[currentSong].style.display = "none";
     document.getElementsByClassName("song-number")[currentSong].style.display = "inline";
     currentSong--;
-
     if (currentSong < 0) {
         currentSong = 6;
     }
